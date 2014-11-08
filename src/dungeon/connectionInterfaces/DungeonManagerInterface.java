@@ -4,8 +4,8 @@ public interface DungeonManagerInterface {
 
 	
 	public DrawableCell getCellAt(int x, int y);
-	public int getMapWidth();
-	public int getMapHeight();
-	
+
+	public int getPlayerX();
+	public int getPlayerY();
 	
 }
