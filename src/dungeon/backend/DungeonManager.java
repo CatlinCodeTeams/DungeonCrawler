@@ -5,7 +5,7 @@ import dungeon.connectionInterfaces.DungeonManagerInterface;
 
 public class DungeonManager implements DungeonManagerInterface{
 
-	public DungeonManager(DungeonType basement){
+	public DungeonManager(DungeonType type){
 
 	}
 
