@@ -1,4 +1,4 @@
-package dungeon.frontend;
+package dungeon.backend;
 
 public class DungeonGenerator {
 

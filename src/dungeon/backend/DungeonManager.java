@@ -1,4 +1,4 @@
-package dungeon.frontend;
+package dungeon.backend;
 
 import dungeon.connectionInterfaces.DrawableCell;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
@@ -6,7 +6,7 @@ import dungeon.connectionInterfaces.DungeonManagerInterface;
 public class DungeonManager implements DungeonManagerInterface{
 
 	public DungeonManager(){
-		
+
 	}
 
 	@Override

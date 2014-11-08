@@ -1,4 +1,4 @@
-package dungeon.backend;
+package dungeon.frontend;
 
 import javax.swing.JFrame;
 

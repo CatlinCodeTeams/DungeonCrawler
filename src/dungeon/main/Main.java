@@ -1,7 +1,7 @@
 package dungeon.main;
 
-import dungeon.backend.RPGDisplay;
-import dungeon.frontend.DungeonManager;
+import dungeon.backend.DungeonManager;
+import dungeon.frontend.RPGDisplay;
 
 public class Main {
 
