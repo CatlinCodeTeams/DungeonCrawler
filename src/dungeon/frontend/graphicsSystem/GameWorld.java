@@ -1,6 +1,4 @@
-package dungeon.frontend;
-import dungeon.frontend.Point;
-
+package dungeon.frontend.graphicsSystem;
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -17,6 +15,7 @@ import java.util.Hashtable;
 import javax.imageio.ImageIO;
 
 import dungeon.frontend.assets.FileLoader;
+import dungeon.frontend.physics.Point;
 
 //World object is where all the game's information is stored, as well as all of its
 //start, update, and draw functions are.

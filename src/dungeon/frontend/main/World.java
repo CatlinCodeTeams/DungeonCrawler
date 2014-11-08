@@ -1,4 +1,6 @@
-package dungeon.frontend;
+package dungeon.frontend.main;
+
+import dungeon.frontend.graphicsSystem.GameWorld;
 
 public class World extends GameWorld{
 

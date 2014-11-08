@@ -1,4 +1,4 @@
-package dungeon.frontend;
+package dungeon.frontend.graphicsSystem;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 

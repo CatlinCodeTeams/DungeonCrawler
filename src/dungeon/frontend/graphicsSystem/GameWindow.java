@@ -1,7 +1,6 @@
-package dungeon.frontend;
+package dungeon.frontend.graphicsSystem;
 
-import dungeon.frontend.GamePanel;
-import dungeon.frontend.GameWorld;
+import dungeon.frontend.graphicsSystem.GamePanel;
 
 import javax.swing.JFrame;
 

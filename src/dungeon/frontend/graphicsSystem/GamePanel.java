@@ -1,8 +1,7 @@
-package dungeon.frontend;
+package dungeon.frontend.graphicsSystem;
 
-import dungeon.frontend.AdvancedGraphics;
-import dungeon.frontend.GameWorld;
-import dungeon.frontend.Point;
+import dungeon.frontend.graphicsSystem.AdvancedGraphics;
+import dungeon.frontend.physics.Point;
 
 import java.awt.Color;
 import java.awt.Dimension;
