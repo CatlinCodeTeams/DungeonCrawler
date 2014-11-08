@@ -14,6 +14,7 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
+import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.assets.FileLoader;
 import dungeon.frontend.physics.Point;
 
@@ -27,8 +28,16 @@ public abstract class GameWorld implements GameWorldInterface{
 	Hashtable<String, BufferedImage> imageTable = new Hashtable<String, BufferedImage>();
 	
 	AdvancedGraphics pen;
+	DungeonManagerInterface mainManager;
 
 	//------------------------------------
+	
+	public GameWorld(DungeonManagerInterface mainManager){
+		this.mainManager = mainManager;
+	}
+	public DungeonManagerInterface getManager(){
+		return mainManager;
+	}
 	
 	public BufferedImage getImage(String name){
 		return imageTable.get(name);

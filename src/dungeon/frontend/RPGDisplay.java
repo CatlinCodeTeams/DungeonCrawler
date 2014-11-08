@@ -16,7 +16,7 @@ public class RPGDisplay {
 			public void run() {
 				//ALL CONSTRUCTOR CODE HERE
 				
-				GameWindow gWindow = new GameWindow(new World());
+				GameWindow gWindow = new GameWindow(new World(mainManager));
 				
 				
 			}

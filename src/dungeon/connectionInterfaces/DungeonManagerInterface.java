@@ -7,5 +7,7 @@ public interface DungeonManagerInterface {
 
 	public int getPlayerX();
 	public int getPlayerY();
+	
+	
 
 }

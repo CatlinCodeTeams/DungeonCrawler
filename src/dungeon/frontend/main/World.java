@@ -2,12 +2,17 @@ package dungeon.frontend.main;
 
 import java.awt.Color;
 
+import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
 import dungeon.frontend.graphicsSystem.GameWorld;
 
 public class World extends GameWorld{
 
-	
+	//Passes the dungeon manager to the GameWorld Parent (manager is stored for reference later).
+	public World(DungeonManagerInterface mainManager) {
+		super(mainManager);
+	}
+
 	int angle;
 	
 	@Override
