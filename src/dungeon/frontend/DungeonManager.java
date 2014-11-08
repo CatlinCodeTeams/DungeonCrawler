@@ -1,5 +1,7 @@
 package dungeon.frontend;
 
-public class DungeonManager {
+import dungeon.connectionInterfaces.DungeonManagerInterface;
+
+public class DungeonManager implements DungeonManagerInterface{
 
 }

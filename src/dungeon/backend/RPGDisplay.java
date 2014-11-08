@@ -1,10 +1,10 @@
 package dungeon.backend;
 
-import dungeon.frontend.DungeonManager;
+import dungeon.connectionInterfaces.DungeonManagerInterface;
 
 public class RPGDisplay {
 
-	public RPGDisplay(DungeonManager mainManager) {
+	public RPGDisplay(DungeonManagerInterface mainManager) {
 		// TODO Auto-generated constructor stub
 	}
 }
