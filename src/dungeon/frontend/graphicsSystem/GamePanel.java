@@ -1,8 +1,7 @@
-package dungeon.frontend;
+package dungeon.frontend.graphicsSystem;
 
-import dungeon.frontend.AdvancedGraphics;
-import dungeon.frontend.GameWorld;
-import dungeon.frontend.Point;
+import dungeon.frontend.graphicsSystem.AdvancedGraphics;
+import dungeon.frontend.physics.Point;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,7 +20,7 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener{
 
-	Color BACKGROUND_COLOR = Color.white;
+	Color BACKGROUND_COLOR = new Color(200, 200, 200);
 
 	static BufferedImage image;
 	

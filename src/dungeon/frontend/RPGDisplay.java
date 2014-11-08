@@ -3,6 +3,8 @@ package dungeon.frontend;
 import javax.swing.SwingUtilities;
 
 import dungeon.connectionInterfaces.DungeonManagerInterface;
+import dungeon.frontend.graphicsSystem.GameWindow;
+import dungeon.frontend.main.World;
 
 public class RPGDisplay {
 

@@ -1,7 +1,7 @@
-package dungeon.frontend;
+package dungeon.frontend.graphicsSystem;
 
-import dungeon.frontend.Point;
-import dungeon.frontend.Vector;
+import dungeon.frontend.physics.Point;
+import dungeon.frontend.physics.Vector;
 
 import java.awt.Color;
 import java.awt.Font;
