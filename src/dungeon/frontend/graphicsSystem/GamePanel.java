@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener{
 
-	Color BACKGROUND_COLOR = Color.white;
+	Color BACKGROUND_COLOR = new Color(200, 200, 200);
 
 	static BufferedImage image;
 	
