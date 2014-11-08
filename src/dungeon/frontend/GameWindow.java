@@ -11,15 +11,15 @@ public class GameWindow {
 	final JFrame mainFrame;
 	GamePanel gamePanel;
 	
-	int GAME_SCALE = 2;
-	int GAME_WIDTH = 320;
-	int GAME_HEIGHT = 240;
+	int GAME_SCALE = 3;
+	int GAME_WIDTH = 300;
+	int GAME_HEIGHT = 200;
 	
 	
 	public GameWindow(GameWorld world){
 		
 		//Create the Jframe.
-		mainFrame = new JFrame("Game Window");
+		mainFrame = new JFrame("Dungeon Crawler");
 		//Set attributes of the Jframe.----:
 		//Window closes by default
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
