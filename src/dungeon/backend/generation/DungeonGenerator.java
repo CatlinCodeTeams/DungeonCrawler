@@ -3,8 +3,11 @@ package dungeon.backend.generation;
 import dungeon.backend.DungeonType;
 
 public class DungeonGenerator {
-	public final DungeonGraph graph;
+	public final DungeonType targetType;
 	public DungeonGenerator(DungeonType type){
-		graph=new DungeonGraph(null);
+		targetType=type;
+	}
+	public DungeonGraph generate() {
+		return null;
 	}
 }
