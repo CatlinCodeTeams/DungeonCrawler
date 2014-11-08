@@ -2,11 +2,14 @@ package dungeon.backend;
 
 import dungeon.backend.generation.DungeonGenerator;
 import dungeon.backend.generation.DungeonGraph;
+import dungeon.backend.player.PlayerManager;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 
 public class DungeonManager implements DungeonManagerInterface{
+
 	protected final DungeonGraph layout;
+	protected final PlayerManager playerManager=new PlayerManager();
 
 	public DungeonManager(DungeonType type){
 		layout=new DungeonGenerator(type).generate();
@@ -19,25 +22,31 @@ public class DungeonManager implements DungeonManagerInterface{
 
 	@Override
 	public int getPlayerX() {
-		return 0;
+		return playerManager.x;
 	}
 
 	@Override
 	public int getPlayerY() {
-		return 0;
+		return playerManager.y;
 	}
 
 	@Override
 	public void upKeyPressed() {
-
+		playerManager.y--;
 	}
 
 	@Override
-	public void downKeyPressed() {}
+	public void downKeyPressed() {
+		playerManager.y++;
+	}
 
 	@Override
-	public void leftKeyPressed() {}
+	public void leftKeyPressed() {
+		playerManager.x--;
+	}
 
 	@Override
-	public void rightKeyPressed() {}
+	public void rightKeyPressed() {
+		playerManager.x++;
+	}
 }
