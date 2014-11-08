@@ -8,6 +8,6 @@ public class DungeonGenerator {
 		targetType=type;
 	}
 	public DungeonGraph generate() {
-		return null;
+		return new DungeonGraph();
 	}
 }

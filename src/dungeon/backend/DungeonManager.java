@@ -13,8 +13,7 @@ public class DungeonManager implements DungeonManagerInterface{
 
 	@Override
 	public CellType getCellTypeAt(int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
+		return layout.getCellTypeAt(x,y);
 	}
 
 	@Override
