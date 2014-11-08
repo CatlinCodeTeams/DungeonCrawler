@@ -15,6 +15,10 @@ public class DungeonGraph {
 		}
 	});
 
+	public void makeCellFloor(int x, int y){
+		locations.get(x).put(y, CellType.Floor);
+	}
+
 	public CellType getCellTypeAt(int x, int y) {
 		return locations.get(x).get(y);
 	}

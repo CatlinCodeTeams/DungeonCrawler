@@ -7,6 +7,7 @@ import dungeon.connectionInterfaces.DungeonManagerInterface;
 
 public class DungeonManager implements DungeonManagerInterface{
 	protected final DungeonGraph layout;
+
 	public DungeonManager(DungeonType type){
 		layout=new DungeonGenerator(type).generate();
 	}
@@ -18,14 +19,25 @@ public class DungeonManager implements DungeonManagerInterface{
 
 	@Override
 	public int getPlayerX() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getPlayerY() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
+	public void upKeyPressed() {
+
+	}
+
+	@Override
+	public void downKeyPressed() {}
+
+	@Override
+	public void leftKeyPressed() {}
+
+	@Override
+	public void rightKeyPressed() {}
 }
