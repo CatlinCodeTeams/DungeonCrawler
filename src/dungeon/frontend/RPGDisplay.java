@@ -4,7 +4,7 @@ import javax.swing.SwingUtilities;
 
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.graphicsSystem.GameWindow;
-import dungeon.frontend.main.World;
+import dungeon.frontend.world.World;
 
 public class RPGDisplay {
 
@@ -14,11 +14,9 @@ public class RPGDisplay {
 		SwingUtilities.invokeLater(new Runnable(){
 			@Override
 			public void run() {
-				//ALL CONSTRUCTOR CODE HERE
-				
+				//ALL CONSTRUCTOR CODE HERE:
 				GameWindow gWindow = new GameWindow(new World(mainManager));
-				
-				
+				//------------
 			}
 		});
 	}
