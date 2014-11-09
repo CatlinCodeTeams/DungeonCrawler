@@ -7,6 +7,8 @@ import java.util.Random;
 import dungeon.backend.DungeonType;
 import dungeon.backend.generation.section.DungeonSection;
 import dungeon.backend.generation.section.RectangleSection;
+import dungeon.backend.generation.section.config.ItemConfig.Item;
+import dungeon.backend.generation.section.config.ItemConfig.ItemType;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.util.Direction;
 import dungeon.util.physics.Point;
@@ -61,6 +63,29 @@ public class DungeonGenerator {
 				}else{
 					System.out.println(select.getX());
 					continue;
+				}
+			}
+		}
+		//Place items throughout the rooms
+		for(Item i:targetType.items.items){
+			List<Point> validLocations=new ArrayList<>();
+			for (Point p:generationTarget.getAllLocationsOfCellType(CellType.Floor)){
+				if(generationTarget.numNeighborsOfType((int) p.getX(),(int) p.getY(), CellType.Floor)==4){
+					validLocations.add(p);
+				}
+			}
+			if(i.type==ItemType.SET_NUM){
+				for(int count=0;count<i.value;count++){
+					Point target=(validLocations.get(RNG.nextInt(validLocations.size())));
+					generationTarget.makeCellType((int) target.getX(),(int) target.getY(),i.target);
+				}
+				continue;
+			}
+			if(i.type==ItemType.CHANCE){
+				for(Point p:validLocations){
+					if(RNG.nextDouble()<i.value){
+						generationTarget.makeCellType((int) p.getX(),(int) p.getY(),i.target);
+					}
 				}
 			}
 		}

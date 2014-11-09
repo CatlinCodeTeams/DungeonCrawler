@@ -42,36 +42,44 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void upKeyPressed() {
-		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).PASSABLE){
-			playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
-			playerManager.y--;
+		if(!playerManager.isAnimating()){
+			if(layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).PASSABLE){
+				playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
+				playerManager.y--;
+			}
 			playerManager.currentDirection=Direction.NORTH;
 		}
 	}
 
 	@Override
 	public void downKeyPressed() {
-		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).PASSABLE){
-			playerManager.tryAddAnimationInstance(PlayerAnimation.walkDown.copy());
-			playerManager.y++;
+		if(!playerManager.isAnimating()){
+			if(layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).PASSABLE){
+				playerManager.tryAddAnimationInstance(PlayerAnimation.walkDown.copy());
+				playerManager.y++;
+			}
 			playerManager.currentDirection=Direction.SOUTH;
 		}
 	}
 
 	@Override
 	public void leftKeyPressed() {
-		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).PASSABLE){
-			playerManager.tryAddAnimationInstance(PlayerAnimation.walkLeft.copy());
-			playerManager.x--;
+		if(!playerManager.isAnimating()){
+			if(layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).PASSABLE){
+				playerManager.tryAddAnimationInstance(PlayerAnimation.walkLeft.copy());
+				playerManager.x--;
+			}
 			playerManager.currentDirection=Direction.WEST;
 		}
 	}
 
 	@Override
 	public void rightKeyPressed() {
-		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).PASSABLE){
-			playerManager.tryAddAnimationInstance(PlayerAnimation.walkRight.copy());
-			playerManager.x++;
+		if(!playerManager.isAnimating()){
+			if(layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).PASSABLE){
+				playerManager.tryAddAnimationInstance(PlayerAnimation.walkRight.copy());
+				playerManager.x++;
+			}
 			playerManager.currentDirection=Direction.EAST;
 		}
 	}
@@ -85,7 +93,20 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void interactKeyPressed() {
-		// TODO Auto-generated method stub
+		if(!playerManager.isAnimating()){
+			if(playerManager.currentDirection==Direction.NORTH){
+				layout.makeCellType(getPlayerX(), getPlayerY()-1,layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).transform);
+			}
+			if(playerManager.currentDirection==Direction.SOUTH){
+				layout.makeCellType(getPlayerX(), getPlayerY()+1,layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).transform);
+			}
+			if(playerManager.currentDirection==Direction.EAST){
+				layout.makeCellType(getPlayerX()+1, getPlayerY(),layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).transform);
+			}
+			if(playerManager.currentDirection==Direction.WEST){
+				layout.makeCellType(getPlayerX()-1, getPlayerY(),layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).transform);
+			}
+		}
 
 	}
 }

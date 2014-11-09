@@ -6,8 +6,12 @@ import java.util.Random;
 
 import dungeon.backend.generation.section.DungeonSection;
 import dungeon.backend.generation.section.RectangleSection;
+import dungeon.backend.generation.section.config.ItemConfig;
+import dungeon.backend.generation.section.config.ItemConfig.Item;
+import dungeon.backend.generation.section.config.ItemConfig.ItemType;
 import dungeon.backend.generation.section.config.SectionConfig;
 import dungeon.backend.generation.section.config.SectionConfig.SectionCreator;
+import dungeon.connectionInterfaces.CellType;
 import dungeon.util.Direction;
 
 public enum DungeonType {
@@ -56,16 +60,18 @@ public enum DungeonType {
 				}
 
 			})
-	});
+	},new ItemConfig(new Item[]{new Item(CellType.Stair,ItemType.SET_NUM,1),new Item(CellType.Torch,ItemType.CHANCE,0.01)}));
 	public static final Random rgen=new Random();
 	public final SectionConfig config;
+	public final ItemConfig items;
 
-	DungeonType(SectionCreatorWrapper[] wrappers) {
+	DungeonType(SectionCreatorWrapper[] wrappers,ItemConfig i) {
 		Map<SectionCreator,Integer> sections=new HashMap<>();
 		for(SectionCreatorWrapper w:wrappers){
 			sections.put(w.c, w.probability);
 		}
 		config=new SectionConfig(sections);
+		items=i;
 	}
 
 	public String getName() {
