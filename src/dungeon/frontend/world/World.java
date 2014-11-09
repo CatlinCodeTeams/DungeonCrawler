@@ -19,7 +19,7 @@ public class World extends GameWorld{
 		super(mainManager);
 	}
 
-	boolean inGame = false;
+	boolean inGame = true;
 	
 	//ArrayList<Wall> wallList
 	
