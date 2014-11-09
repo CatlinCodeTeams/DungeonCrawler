@@ -142,7 +142,8 @@ public class World extends GameWorld{
 		//pen.setColor(new Color(0, 0, 255));
 		//pen.fillCircle(0, 0, 20);
 		
-		
+		pen.setColor(new Color(0,0,0,100));
+		pen.fillOval(2, 12, 16, 10);
 		pen.drawImage(currentImage.image, 0, 0, null);
 		//
 		
