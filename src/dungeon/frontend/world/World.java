@@ -2,7 +2,9 @@ package dungeon.frontend.world;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
+import dungeon.animation.AnimationFrame;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
@@ -17,6 +19,8 @@ public class World extends GameWorld{
 	}
 
 	int angle;
+	
+	//ArrayList<Wall> wallList
 	
 	@Override
 	public void start() {
@@ -63,11 +67,16 @@ public class World extends GameWorld{
 			
 		}
 		
-		pen.setColor(new Color(0, 0, 255));
-		pen.fillCircle(0, 0, 20);
+		//Drawing the player-------
+		//pen.setColor(new Color(0, 0, 255));
+		//pen.fillCircle(0, 0, 20);
+		
+		AnimationFrame currentImage = mainManager.getPlayerAnimations().getNextImage();
+		pen.drawImage(currentImage.image, 0+currentImage.xDisplacment, 0+currentImage.yDisplacment, null);
+		//
 		
 		
-		//Reset Camera
+		//Reset Camera for HUD
 		pen.moveCameraPosition(150, 100);
 		
 		pen.setColor(new Color(0, 0, 0, 140));
@@ -128,19 +137,19 @@ public class World extends GameWorld{
 		DungeonManagerInterface mainManager = getManager();
 		
 		//Left
-		if (event.getExtendedKeyCode()==37){
+		if ((event.getExtendedKeyCode()==37)||(event.getKeyChar()=='a')){
 			mainManager.leftKeyPressed();
 		}
 		//Up
-		if (event.getExtendedKeyCode()==38){
+		if ((event.getExtendedKeyCode()==38)||(event.getKeyChar()=='w')){
 			mainManager.upKeyPressed();
 		}
 		//Right
-		if (event.getExtendedKeyCode()==39){
+		if ((event.getExtendedKeyCode()==39)||(event.getKeyChar()=='d')){
 			mainManager.rightKeyPressed();
 		}
 		//Down
-		if (event.getExtendedKeyCode()==40){
+		if ((event.getExtendedKeyCode()==40)||(event.getKeyChar()=='s')){
 			mainManager.downKeyPressed();
 		}
 		if (event.getKeyChar()=='r'){

@@ -36,8 +36,8 @@ public class PlayerManager extends Animateable{
 		Graphics2D g=moving.createGraphics();
 		g.setColor(Color.RED);
 		g.fillOval(0, 0, 20, 20);
-		for(int y=20;y>0;y--){
-			l.add(new AnimationFrame(moving, 0, y, 20));
+		for(int y=21;y>1;y--){
+			l.add(new AnimationFrame(moving, 20, 0, y));
 		}
 		walkUp=new AnimationInstance(l);
 	}

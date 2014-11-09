@@ -19,6 +19,7 @@ public class AnimationInstance {
 		this(Arrays.asList(frames));
 	}
 	public AnimationFrame getNextFrame() throws IllegalStateException{
+		if(animation.isEmpty()) throw new IllegalStateException();
 		if (waitFor==0){
 			currentFrame=animation.poll();
 			waitFor=currentFrame.duration;
