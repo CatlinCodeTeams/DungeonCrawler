@@ -83,7 +83,7 @@ public class DungeonGraph {
 
 	public boolean verifyFree(DungeonSection section){
 		for(Point p:section.getContents()){
-			if(getCellTypeAt((int)p.getX(),(int)p.getY())!=CellType.WALL){
+			if(getCellTypeAt((int)p.getX(),(int)p.getY())!=CellType.Wall){
 				return false;
 			}
 		}

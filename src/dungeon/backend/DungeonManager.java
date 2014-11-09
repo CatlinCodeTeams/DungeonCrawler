@@ -7,6 +7,7 @@ import dungeon.backend.generation.DungeonGraph;
 import dungeon.backend.player.PlayerManager;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
+import dungeon.util.Direction;
 
 public class DungeonManager implements DungeonManagerInterface {
 
@@ -39,6 +40,7 @@ public class DungeonManager implements DungeonManagerInterface {
 		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).PASSABLE){
 			playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
 			playerManager.y--;
+			playerManager.currentDirection=Direction.NORTH;
 		}
 	}
 
@@ -47,6 +49,7 @@ public class DungeonManager implements DungeonManagerInterface {
 		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).PASSABLE){
 			playerManager.tryAddAnimationInstance(PlayerAnimation.walkDown.copy());
 			playerManager.y++;
+			playerManager.currentDirection=Direction.SOUTH;
 		}
 	}
 
@@ -55,6 +58,7 @@ public class DungeonManager implements DungeonManagerInterface {
 		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).PASSABLE){
 			playerManager.tryAddAnimationInstance(PlayerAnimation.walkLeft.copy());
 			playerManager.x--;
+			playerManager.currentDirection=Direction.WEST;
 		}
 	}
 
@@ -63,6 +67,7 @@ public class DungeonManager implements DungeonManagerInterface {
 		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).PASSABLE){
 			playerManager.tryAddAnimationInstance(PlayerAnimation.walkRight.copy());
 			playerManager.x++;
+			playerManager.currentDirection=Direction.EAST;
 		}
 	}
 

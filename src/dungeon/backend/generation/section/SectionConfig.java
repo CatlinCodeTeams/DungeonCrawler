@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import dungeon.util.Direction;
 import dungeon.util.factory.Factory;
 
 public class SectionConfig {
@@ -38,6 +39,6 @@ public class SectionConfig {
 		throw new RuntimeException("SOMETHING IS TERRIBLY WRONG");
 	}
 	public interface SectionCreator{
-		public DungeonSection getSection(int startX,int startY);
+		public DungeonSection getSection(int startX,int startY,Direction d);
 	}
 }
