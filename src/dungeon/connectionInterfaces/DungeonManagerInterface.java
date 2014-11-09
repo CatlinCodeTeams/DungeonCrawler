@@ -19,5 +19,7 @@ public interface DungeonManagerInterface {
 
 	public void resetKeyPressed();
 
+	public void interactKeyPressed();
+
 	public Animateable getPlayerAnimations();
 }
