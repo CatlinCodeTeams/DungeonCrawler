@@ -41,13 +41,13 @@ public enum DungeonType {
 					int height=(int)(5*rgen.nextDouble())+3;
 					int width=(int)(5*rgen.nextDouble())+3;
 					if(d==Direction.NORTH){
-						return new RectangleSection(startX-width/2,startY-height-1,width,height);
+						return new RectangleSection(startX-width/2,startY-height+1,width,height);
 					}
 					if(d==Direction.SOUTH){
 						return new RectangleSection(startX-width/2,startY,1,height);
 					}
 					if(d==Direction.WEST){
-						return new RectangleSection(startX-width-1,startY-height/2,width,1);
+						return new RectangleSection(startX-width+1,startY-height/2,width,1);
 					}
 					if(d==Direction.EAST){
 						return new RectangleSection(startX,startY-height/2,width,1);

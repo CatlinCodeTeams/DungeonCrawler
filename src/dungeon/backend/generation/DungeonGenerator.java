@@ -55,7 +55,7 @@ public class DungeonGenerator {
 					throw new RuntimeException();
 				}
 				if(generationTarget.verifyFree(toGenSection)){
-					generationTarget.makeCellFloor((int)select.getX(), (int)select.getY());
+					generationTarget.makeCellType((int)select.getX(), (int)select.getY(),CellType.Door);
 					generationTarget.makeSectionFloor(toGenSection);
 					break;
 				}else{
