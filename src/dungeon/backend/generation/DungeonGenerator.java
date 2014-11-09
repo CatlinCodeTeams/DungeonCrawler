@@ -8,6 +8,7 @@ import dungeon.backend.DungeonType;
 import dungeon.backend.generation.section.DungeonSection;
 import dungeon.backend.generation.section.RectangleSection;
 import dungeon.connectionInterfaces.CellType;
+import dungeon.util.Direction;
 import dungeon.util.physics.Point;
 
 public class DungeonGenerator {
@@ -18,36 +19,47 @@ public class DungeonGenerator {
 	}
 
 	public DungeonGraph generate() {
-
-		final List<DungeonSection> sections = new ArrayList<>();
+		//Make the graph and the RNG
 		final DungeonGraph generationTarget = new DungeonGraph();
 		Random RNG=new Random();
+		//Generate the first rooms size
 		final int width=3+(int) (4 * Math.abs(RNG.nextGaussian()));
 		final int height=3+(int) (4 * Math.abs(RNG.nextGaussian()));
-		final DungeonSection startingRoom = new RectangleSection(-2,-2, width, height);
-		sections.add(startingRoom);
-		generationTarget.makeSectionFloor(startingRoom);
+		//Now make the first room, of that size
+		generationTarget.makeSectionFloor(new RectangleSection(-2,-2, width, height));
+		//Generate remaining rooms
 		for(int num=0;num<20;num++){
-			List<Point> walls=generationTarget.getAllLocationsOfCellType(CellType.Wall);
-			List<Point> oneNeighborWalls=new ArrayList<>();
-
-			for (Point p:walls){
-				if(generationTarget.numNeighborsOfType((int) p.getX(),(int) p.getY(), CellType.Floor)==1){
-					oneNeighborWalls.add(p);
+			while(true){
+				//Select walls with one free neighbor
+				List<Point> oneNeighborWalls=new ArrayList<>();
+				for (Point p:generationTarget.getAllLocationsOfCellType(CellType.Wall)){
+					if(generationTarget.numNeighborsOfType((int) p.getX(),(int) p.getY(), CellType.Floor)==1){
+						oneNeighborWalls.add(p);
+					}
 				}
-			}
+				//Choose a random on of those walls
+				Point select=oneNeighborWalls.get(RNG.nextInt(oneNeighborWalls.size()));
+				//Get the opposite of its freespace to help the generation code
+				Point opposite=generationTarget.pointOpositeNeighborOfType((int)select.getX(), (int)select.getY(), CellType.Floor);
 
-			Point select=oneNeighborWalls.get(RNG.nextInt(oneNeighborWalls.size()));
-			Point opposite=generationTarget.pointOpositeNeighborOfType((int)select.getX(), (int)select.getY(), CellType.Floor);
-
-			if(select.getX()>opposite.getX()){
-
-			}else if(select.getX()<opposite.getX()){
-
-			}else if(select.getY()>opposite.getY()){
-
-			}else if(select.getY()<opposite.getY()){
-
+				DungeonSection toGenSection;
+				if(select.getX()>opposite.getX()){
+					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.EAST);
+				}else if(select.getX()<opposite.getX()){
+					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.WEST);
+				}else if(select.getY()>opposite.getY()){
+					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.WEST);
+				}else if(select.getY()<opposite.getY()){
+					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.WEST);
+				}else{
+					throw new RuntimeException();
+				}
+				if(generationTarget.verifyFree(toGenSection)){
+					generationTarget.makeSectionFloor(toGenSection);
+					break;
+				}else{
+					continue;
+				}
 			}
 		}
 		return generationTarget;
