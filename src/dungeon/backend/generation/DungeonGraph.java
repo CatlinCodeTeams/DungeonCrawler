@@ -31,6 +31,9 @@ public class DungeonGraph {
 	}
 
 	public void makeCellFloor(final int x, final int y) {
+		makeCellType(x,y,CellType.Floor);
+	}
+	public void makeCellType(final int x, final int y,final CellType type) {
 		if (x > maxX) {
 			maxX = x;
 		}
@@ -43,12 +46,13 @@ public class DungeonGraph {
 		if (y < minY) {
 			minY = y;
 		}
-		locations.get(x).put(y, CellType.Floor);
+		locations.get(x).put(y, type);
 	}
 
 	public CellType getCellTypeAt(final int x, final int y) {
 		return locations.get(x).get(y);
 	}
+
 
 	public List<Point> getAllLocationsOfCellType(CellType type){
 		List<Point> locations=new ArrayList<>();
@@ -103,4 +107,5 @@ public class DungeonGraph {
 	public int getMinY() {
 		return minY;
 	}
+
 }
