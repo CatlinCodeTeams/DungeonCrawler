@@ -1,6 +1,7 @@
 package dungeon.frontend.world;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
@@ -37,18 +38,31 @@ public class World extends GameWorld{
 		int pX = mainManager.getPlayerX();
 		int pY = mainManager.getPlayerY();
 		Point playerLocation = new Point(pX, pY);
-		pen.moveCameraPosition(pX-150, pY-100);
-
-		pen.drawCenteredCircle(0, 0, 32);
-		for (int x=-7; x<7; x++){
-			for (int y=-5; y<5; y++){
+		
+		
+		for (int x=0; x<16; x++){
+			for (int y=0; y<11; y++){
 				int coordX = pX + x;
 				int coordY = pY + y;
 				
+				pen.setColor(new Color(255, 0 , 0));
 				CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
+				if (cellType==CellType.Floor){
+					pen.setColor(new Color(240, 240, 240));
+				}
+				else if (cellType==CellType.Wall){
+					pen.setColor(new Color(100, 100, 100));	
+				}
+				
+				pen.fillRect(x* 20, y*20, 20, 20);
+				pen.setColor(new Color(0,0,0));
+				pen.drawRect(x*20, y*20, 20, 20);
 			}
 			
 		}
+		
+		pen.setColor(new Color(0, 0, 255));
+		//pen.fillCircle(pX*20, pY*20, 16);
 		
 		
 		
@@ -62,6 +76,33 @@ public class World extends GameWorld{
 		for (int y=0; y<10; y++){
 			pen.drawLine(0, 20*y, 300, 20*y);
 		}
+	}
+	
+	@Override
+	public void keyTriggered(KeyEvent event){
+		
+		DungeonManagerInterface mainManager = getManager();
+		
+		//Left
+		if (event.getExtendedKeyCode()==37){
+			mainManager.leftKeyPressed();
+		}
+		//Up
+		if (event.getExtendedKeyCode()==38){
+			mainManager.upKeyPressed();
+		}
+		//Right
+		if (event.getExtendedKeyCode()==39){
+			mainManager.rightKeyPressed();
+		}
+		//Down
+		if (event.getExtendedKeyCode()==40){
+			mainManager.downKeyPressed();
+		}
+		if (event.getKeyChar()=='r'){
+			mainManager.resetKeyPressed();
+		}
+			
 	}
 
 }
