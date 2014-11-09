@@ -53,7 +53,7 @@ public class DungeonManager implements DungeonManagerInterface {
 	@Override
 	public void upKeyPressed() {
 		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
-			if(layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).PASSABLE){
+			if(layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).PASSABLE && enemyMan.getEnemyAt(getPlayerX(),getPlayerY()-1)==null){
 				playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
 				playerManager.y--;
 				enemyMan.queueForTurn(playerManager);
@@ -65,7 +65,7 @@ public class DungeonManager implements DungeonManagerInterface {
 	@Override
 	public void downKeyPressed() {
 		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
-			if(layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).PASSABLE){
+			if(layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).PASSABLE && enemyMan.getEnemyAt(getPlayerX(),getPlayerY()+1)==null){
 				playerManager.tryAddAnimationInstance(PlayerAnimation.walkDown.copy());
 				playerManager.y++;
 				enemyMan.queueForTurn(playerManager);
@@ -77,7 +77,7 @@ public class DungeonManager implements DungeonManagerInterface {
 	@Override
 	public void leftKeyPressed() {
 		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
-			if(layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).PASSABLE){
+			if(layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).PASSABLE && enemyMan.getEnemyAt(getPlayerX()-1,getPlayerY())==null){
 				playerManager.tryAddAnimationInstance(PlayerAnimation.walkLeft.copy());
 				playerManager.x--;
 				enemyMan.queueForTurn(playerManager);
@@ -89,7 +89,7 @@ public class DungeonManager implements DungeonManagerInterface {
 	@Override
 	public void rightKeyPressed() {
 		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
-			if(layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).PASSABLE){
+			if(layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).PASSABLE && enemyMan.getEnemyAt(getPlayerX()+1,getPlayerY())==null){
 				playerManager.tryAddAnimationInstance(PlayerAnimation.walkRight.copy());
 				playerManager.x++;
 				enemyMan.queueForTurn(playerManager);
@@ -102,16 +102,32 @@ public class DungeonManager implements DungeonManagerInterface {
 	public void interactKeyPressed() {
 		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
 			if(playerManager.currentDirection==Direction.NORTH){
+				if(enemyMan.getEnemyAt(getPlayerX(), getPlayerY()-1)!=null){
+					playerManager.tryAddAnimationInstance(PlayerAnimation.attackUp.copy());
+				}else
 				layout.makeCellType(getPlayerX(), getPlayerY()-1,layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).transform);
 			}
 			if(playerManager.currentDirection==Direction.SOUTH){
+				if(enemyMan.getEnemyAt(getPlayerX(), getPlayerY()+1)!=null){
+					playerManager.tryAddAnimationInstance(PlayerAnimation.attackDown.copy());
+				}else
 				layout.makeCellType(getPlayerX(), getPlayerY()+1,layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).transform);
 			}
 			if(playerManager.currentDirection==Direction.EAST){
+				if(enemyMan.getEnemyAt(getPlayerX()+1, getPlayerY())!=null){
+					playerManager.tryAddAnimationInstance(PlayerAnimation.attackRight.copy());
+				}else
 				layout.makeCellType(getPlayerX()+1, getPlayerY(),layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).transform);
 			}
 			if(playerManager.currentDirection==Direction.WEST){
+				if(enemyMan.getEnemyAt(getPlayerX()-1, getPlayerY())!=null){
+					playerManager.tryAddAnimationInstance(PlayerAnimation.attackLeft.copy());
+				}else
 				layout.makeCellType(getPlayerX()-1, getPlayerY(),layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).transform);
+			}
+			if(layout.getCellTypeAt(getPlayerX(), getPlayerY())==CellType.Stair){
+				this.resetKeyPressed();
+				return;
 			}
 			enemyMan.queueForTurn(playerManager);
 		}
@@ -124,6 +140,7 @@ public class DungeonManager implements DungeonManagerInterface {
 			layout = gen.generate();
 			playerManager.x = 0;
 			playerManager.y = 0;
+			enemyMan.currentEnemies.clear();
 		}
 	}
 

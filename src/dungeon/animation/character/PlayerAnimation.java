@@ -11,7 +11,6 @@ public class PlayerAnimation {
 	public static AnimationInstance walkUp;
 
 		static {
-
 		List<AnimationFrame> l=new ArrayList<>();
 		boolean frame = false;
 		for(int count=0;count<20;count++){
@@ -82,7 +81,6 @@ public class PlayerAnimation {
 	public static AnimationInstance walkRight;
 
 	static{
-
 		List<AnimationFrame> l=new ArrayList<>();
 		boolean frame = false;
 		for(int count=0;count<20;count++){
@@ -98,9 +96,35 @@ public class PlayerAnimation {
 					l.add(new AnimationFrame("spr_right_walk2.png",1,-20-count*(-1),0-count*(0)));
 				}
 
-			} catch (IOException e) {}
+			} catch (IOException e) {
+			}
 		}
 		walkRight = new AnimationInstance(l);
+	}
+
+	public static AnimationInstance attackUp;
+	static{
+		try {
+			attackUp=new AnimationInstance(new AnimationFrame[]{new AnimationFrame("spr_sword_up.png",30,0,-10)});
+		} catch (IOException e) {}
+	}
+	public static AnimationInstance attackDown;
+	static{
+		try {
+			attackDown=new AnimationInstance(new AnimationFrame[]{new AnimationFrame("spr_sword_down.png",30,0,0)});
+		} catch (IOException e) {}
+	}
+	public static AnimationInstance attackRight;
+	static{
+		try {
+			attackRight=new AnimationInstance(new AnimationFrame[]{new AnimationFrame("spr_sword_right.png",30,0,0)});
+		} catch (IOException e) {}
+	}
+	public static AnimationInstance attackLeft;
+	static{
+		try {
+			attackLeft=new AnimationInstance(new AnimationFrame[]{new AnimationFrame("spr_sword_left.png",30,-10,0)});
+		} catch (IOException e) {}
 	}
 
 }

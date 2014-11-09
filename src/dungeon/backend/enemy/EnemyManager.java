@@ -14,11 +14,12 @@ import dungeon.util.Direction;
 import dungeon.util.physics.Point;
 
 public class EnemyManager {
-	List<Enemy> currentEnemies=new ArrayList<>();
+	public List<Enemy> currentEnemies=new ArrayList<>();
 	public AtomicBoolean enemyTurn=new AtomicBoolean(false);
 	public final DungeonGraph world;
 	public final DungeonType type;
 	public final PlayerManager player;
+
 	public EnemyManager(DungeonGraph world,DungeonType type,PlayerManager playMan){
 		this.world=world;
 		this.type=type;
@@ -38,7 +39,7 @@ public class EnemyManager {
 			currentEnemies.add(new Enemy(EnemyType.Slime,(int)selected.getX(),(int)selected.getY()));
 		}
 		for(Enemy e:currentEnemies){
-			Direction move=e.type.ai.control.toMove(e, world, aiRandom);
+			Direction move=e.type.ai.control.toMove(e, world,this, player, aiRandom);
 			if (move==null){
 				continue;
 			}
