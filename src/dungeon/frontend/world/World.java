@@ -38,14 +38,14 @@ public class World extends GameWorld{
 		int pX = mainManager.getPlayerX();
 		int pY = mainManager.getPlayerY();
 		Point playerLocation = new Point(pX, pY);
-		pen.moveCameraPosition(pX-150, pY-100);
 		
 		
-		for (int x=-8; x<8; x++){
-			for (int y=-5; y<5; y++){
+		for (int x=0; x<16; x++){
+			for (int y=0; y<11; y++){
 				int coordX = pX + x;
 				int coordY = pY + y;
 				
+				pen.setColor(new Color(255, 0 , 0));
 				CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
 				if (cellType==CellType.Floor){
 					pen.setColor(new Color(240, 240, 240));
@@ -53,15 +53,16 @@ public class World extends GameWorld{
 				else if (cellType==CellType.Wall){
 					pen.setColor(new Color(100, 100, 100));	
 				}
-				pen.fillRect(coordX * 20, coordY*20, 20, 20);
+				
+				pen.fillRect(x* 20, y*20, 20, 20);
 				pen.setColor(new Color(0,0,0));
-				pen.drawRect(coordX*20, coordY*20, 20, 20);
+				pen.drawRect(x*20, y*20, 20, 20);
 			}
 			
 		}
 		
-		pen.setColor(new Color(0, 0, 0));
-		pen.drawCenteredCircle(0, 0, 32);
+		pen.setColor(new Color(0, 0, 255));
+		//pen.fillCircle(pX*20, pY*20, 16);
 		
 		
 		
@@ -98,7 +99,9 @@ public class World extends GameWorld{
 		if (event.getExtendedKeyCode()==40){
 			mainManager.downKeyPressed();
 		}
-			
+		if (event.getKeyChar()=='r'){
+			mainManager.resetKeyPressed();
+		}
 			
 	}
 
