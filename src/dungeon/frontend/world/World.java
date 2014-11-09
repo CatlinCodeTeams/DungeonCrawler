@@ -169,7 +169,7 @@ public class World extends GameWorld{
 
 
 					//--------------------------------------------Shadow Casting
-					ArrayList<Point> points = new ArrayList<Point>();
+/*					ArrayList<Point> points = new ArrayList<Point>();
 					ArrayList<Point> points2 = new ArrayList<Point>();
 					Point p1 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment);
 					Point p2 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment+20);
@@ -193,8 +193,18 @@ public class World extends GameWorld{
 					}
 					
 					
-					//int[] xPoints= []
-					//pen.drawPolygon(xPoints, yPoints, nPoints);
+					int[] xPoints= new int[8];
+					for (int i=0; i<4; i++){
+						xPoints[i] = (int)points.get(i).getX();
+						xPoints[i+4] = (int)points2.get(i).getX();
+					}
+					
+					int[] yPoints= new int[8];
+					for (int i=0; i<4; i++){
+						yPoints[i] = (int)points.get(i).getY();
+						yPoints[i+4] = (int)points2.get(i).getY();
+					}
+					pen.drawPolygon(xPoints, yPoints, 8);*/
 
 					//-----------------------------
 
