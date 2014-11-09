@@ -8,7 +8,7 @@ public class EnemyManager {
 
 	public void takeTurn(){
 		for(Enemy e:currentEnemies){
-			if(e.isD)
+
 		}
 	}
 }

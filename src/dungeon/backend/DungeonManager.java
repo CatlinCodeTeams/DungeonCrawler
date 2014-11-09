@@ -2,6 +2,7 @@ package dungeon.backend;
 
 import dungeon.animation.Animateable;
 import dungeon.animation.character.PlayerAnimation;
+import dungeon.backend.enemy.Enemy;
 import dungeon.backend.generation.DungeonGenerator;
 import dungeon.backend.generation.DungeonGraph;
 import dungeon.backend.player.PlayerManager;
@@ -109,5 +110,10 @@ public class DungeonManager implements DungeonManagerInterface {
 			}
 		}
 
+	}
+
+	@Override
+	public Enemy getEnemyAt(int x, int y) {
+		return null;
 	}
 }

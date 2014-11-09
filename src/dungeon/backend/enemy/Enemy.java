@@ -1,8 +1,9 @@
 package dungeon.backend.enemy;
 
+import dungeon.animation.Animateable;
 import dungeon.animation.AnimationFrame;
 
-public class Enemy{
+public class Enemy extends Animateable{
 
 	public Enemy(int health){
 	}

@@ -46,13 +46,13 @@ public class DungeonGenerator {
 
 				DungeonSection toGenSection;
 				if(select.getX()>opposite.getX()){
-					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.WEST);
+					toGenSection=targetType.selectionConfig.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.WEST);
 				}else if(select.getX()<opposite.getX()){
-					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.EAST);
+					toGenSection=targetType.selectionConfig.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.EAST);
 				}else if(select.getY()>opposite.getY()){
-					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.NORTH);
+					toGenSection=targetType.selectionConfig.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.NORTH);
 				}else if(select.getY()<opposite.getY()){
-					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.SOUTH);
+					toGenSection=targetType.selectionConfig.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.SOUTH);
 				}else{
 					throw new RuntimeException();
 				}
