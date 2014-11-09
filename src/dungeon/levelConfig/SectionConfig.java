@@ -1,4 +1,4 @@
-package dungeon.backend.generation.section.config;
+package dungeon.levelConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,13 @@ public class SectionConfig {
 	private Random rgen=new Random();
 	private final Map<SectionCreator,Integer> map;
 
+	public SectionConfig(SectionCreator[] creators){
+		Map<SectionCreator,Integer> map=new HashMap<>();
+		for(SectionCreator creator:creators){
+			map.put(creator, creator.probability);
+		}
+		this.map=map;
+	}
 	public SectionConfig(Map<SectionCreator,Integer> map){
 		this.map=map;
 	}
@@ -38,7 +45,11 @@ public class SectionConfig {
 		}
 		throw new RuntimeException("SOMETHING IS TERRIBLY WRONG");
 	}
-	public interface SectionCreator{
-		public DungeonSection getSection(int startX,int startY,Direction d);
+	public static abstract class SectionCreator{
+		public final int probability;
+		public SectionCreator(int probability){
+			this.probability=probability;
+		}
+		public abstract DungeonSection getSection(int startX,int startY,Direction d);
 	}
 }

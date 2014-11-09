@@ -1,8 +1,8 @@
 package dungeon.main;
 
 import dungeon.backend.DungeonManager;
-import dungeon.backend.DungeonType;
 import dungeon.frontend.RPGDisplay;
+import dungeon.levelConfig.DungeonType;
 
 public class Main {
 

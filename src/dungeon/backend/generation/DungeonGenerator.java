@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import dungeon.backend.DungeonType;
 import dungeon.backend.generation.section.DungeonSection;
 import dungeon.backend.generation.section.RectangleSection;
-import dungeon.backend.generation.section.config.ItemConfig.Item;
-import dungeon.backend.generation.section.config.ItemConfig.ItemType;
 import dungeon.connectionInterfaces.CellType;
+import dungeon.levelConfig.DungeonType;
+import dungeon.levelConfig.ItemConfig.Item;
+import dungeon.levelConfig.ItemConfig.ItemType;
 import dungeon.util.Direction;
 import dungeon.util.physics.Point;
 
@@ -64,7 +64,6 @@ public class DungeonGenerator {
 						generationTarget.makeCellType((int)select.getX(), (int)select.getY(),CellType.Floor);
 					break;
 				}else{
-					System.out.println(select.getX());
 					continue;
 				}
 			}

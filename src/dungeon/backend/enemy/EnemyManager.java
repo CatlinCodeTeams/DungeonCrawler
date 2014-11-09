@@ -1,7 +1,14 @@
 package dungeon.backend.enemy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EnemyManager {
-	public EnemyManager(){
-		
+	List<Enemy> currentEnemies=new ArrayList<>();
+
+	public void takeTurn(){
+		for(Enemy e:currentEnemies){
+			if(e.isD)
+		}
 	}
 }

@@ -7,6 +7,7 @@ import dungeon.backend.generation.DungeonGraph;
 import dungeon.backend.player.PlayerManager;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
+import dungeon.levelConfig.DungeonType;
 import dungeon.util.Direction;
 
 public class DungeonManager implements DungeonManagerInterface {

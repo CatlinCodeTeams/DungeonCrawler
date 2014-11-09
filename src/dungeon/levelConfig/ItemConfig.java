@@ -1,4 +1,4 @@
-package dungeon.backend.generation.section.config;
+package dungeon.levelConfig;
 
 import dungeon.connectionInterfaces.CellType;
 

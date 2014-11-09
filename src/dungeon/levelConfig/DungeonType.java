@@ -1,23 +1,19 @@
-package dungeon.backend;
+package dungeon.levelConfig;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import dungeon.backend.generation.section.DungeonSection;
 import dungeon.backend.generation.section.RectangleSection;
-import dungeon.backend.generation.section.config.ItemConfig;
-import dungeon.backend.generation.section.config.ItemConfig.Item;
-import dungeon.backend.generation.section.config.ItemConfig.ItemType;
-import dungeon.backend.generation.section.config.SectionConfig;
-import dungeon.backend.generation.section.config.SectionConfig.SectionCreator;
 import dungeon.connectionInterfaces.CellType;
+import dungeon.levelConfig.ItemConfig.Item;
+import dungeon.levelConfig.ItemConfig.ItemType;
+import dungeon.levelConfig.SectionConfig.SectionCreator;
 import dungeon.util.Direction;
 
 public enum DungeonType {
-	BASEMENT(new SectionCreatorWrapper[]{
+	BASEMENT(new SectionConfig(new SectionCreator[]{
 			//Cooridors
-			new SectionCreatorWrapper(60,new SectionCreator(){
+			new SectionCreator(60){
 				@Override
 				public DungeonSection getSection(int startX, int startY, Direction d) {
 					int legnth=(int)(20*Math.abs(rgen.nextGaussian()))+3;
@@ -36,10 +32,9 @@ public enum DungeonType {
 					throw new RuntimeException();
 				}
 
-			}),
+			},
 			//Room
-			new SectionCreatorWrapper(40,new SectionCreator(){
-
+			new SectionCreator(40){
 				@Override
 				public DungeonSection getSection(int startX, int startY, Direction d) {
 					int height=(int)(5*rgen.nextDouble())+3;
@@ -59,18 +54,15 @@ public enum DungeonType {
 					throw new RuntimeException();
 				}
 
-			})
-	},new ItemConfig(new Item[]{new Item(CellType.Stair,ItemType.SET_NUM,1),new Item(CellType.Torch,ItemType.CHANCE,0.01)}));
+			},
+	}),new ItemConfig(new Item[]{new Item(CellType.Stair,ItemType.SET_NUM,1),new Item(CellType.Torch,ItemType.CHANCE,0.01)}));
+
 	public static final Random rgen=new Random();
-	public final SectionConfig config;
+	public final SectionConfig selectionConfig;
 	public final ItemConfig items;
 
-	DungeonType(SectionCreatorWrapper[] wrappers,ItemConfig i) {
-		Map<SectionCreator,Integer> sections=new HashMap<>();
-		for(SectionCreatorWrapper w:wrappers){
-			sections.put(w.c, w.probability);
-		}
-		config=new SectionConfig(sections);
+	DungeonType(SectionConfig config,ItemConfig i) {
+		selectionConfig=config;
 		items=i;
 	}
 
@@ -78,12 +70,4 @@ public enum DungeonType {
 		return name();
 	}
 
-	public static class SectionCreatorWrapper{
-		public final SectionCreator c;
-		public final int probability;
-		public SectionCreatorWrapper(int probability,SectionCreator c){
-			this.probability=probability;
-			this.c=c;
-		}
-	}
 }
