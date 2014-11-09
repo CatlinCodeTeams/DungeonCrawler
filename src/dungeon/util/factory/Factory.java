@@ -1,4 +1,4 @@
-package dungeon.util.defualtMap;
+package dungeon.util.factory;
 
 public abstract class Factory<F> {
 	public abstract F get();

@@ -36,7 +36,7 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void upKeyPressed() {
-		if(!playerManager.isAnimating()){
+		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).PASSABLE){
 			playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
 			playerManager.y--;
 		}
@@ -44,7 +44,7 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void downKeyPressed() {
-		if(!playerManager.isAnimating()){
+		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).PASSABLE){
 			playerManager.tryAddAnimationInstance(PlayerAnimation.walkDown.copy());
 			playerManager.y++;
 		}
@@ -52,7 +52,7 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void leftKeyPressed() {
-		if(!playerManager.isAnimating()){
+		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).PASSABLE){
 			playerManager.tryAddAnimationInstance(PlayerAnimation.walkLeft.copy());
 			playerManager.x--;
 		}
@@ -60,7 +60,7 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void rightKeyPressed() {
-		if(!playerManager.isAnimating()){
+		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).PASSABLE){
 			playerManager.tryAddAnimationInstance(PlayerAnimation.walkRight.copy());
 			playerManager.x++;
 		}

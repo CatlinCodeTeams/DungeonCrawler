@@ -1,11 +1,14 @@
 package dungeon.backend.generation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import dungeon.backend.generation.section.DungeonSection;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.util.defualtMap.DefaultMap;
-import dungeon.util.defualtMap.Factory;
+import dungeon.util.factory.Factory;
+import dungeon.util.physics.Point;
 
 public class DungeonGraph {
 
@@ -47,6 +50,27 @@ public class DungeonGraph {
 
 	public CellType getCellTypeAt(final int x, final int y) {
 		return locations.get(x).get(y);
+	}
+
+	public List<Point> getAllLocationsOfCellType(CellType type){
+		List<Point> locations=new ArrayList<>();
+		for(int x=getMinX()-1;x<=getMaxX()+1;x++){
+			for(int y=getMinY()-1;y<=getMaxY()+1;y++){
+				if (getCellTypeAt(x,y)==type){
+					locations.add(new Point(x,y));
+				}
+			}
+		}
+		return locations;
+	}
+
+	public int numNeighborsOfType(int x,int y,CellType type){
+		int count=0;
+		if(getCellTypeAt(x+1,y)==type) count++;
+		if(getCellTypeAt(x-1,y)==type) count++;
+		if(getCellTypeAt(x,y+1)==type) count++;
+		if(getCellTypeAt(x,y-1)==type) count++;
+		return count;
 	}
 
 	public int getMaxX() {

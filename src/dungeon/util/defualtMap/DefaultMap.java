@@ -3,6 +3,8 @@ package dungeon.util.defualtMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import dungeon.util.factory.Factory;
+
 public class DefaultMap<K, V> extends HashMap<K, V> {
 
 	/**
