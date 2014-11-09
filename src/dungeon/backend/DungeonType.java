@@ -3,9 +3,10 @@ package dungeon.backend;
 public enum DungeonType {
 	BASEMENT;
 
-	DungeonType(){}
+	DungeonType() {
+	}
 
-	public String getName(){
-		return this.name();
+	public String getName() {
+		return name();
 	}
 }

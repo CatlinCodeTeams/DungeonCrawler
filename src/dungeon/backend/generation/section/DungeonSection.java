@@ -6,10 +6,11 @@ public class DungeonSection {
 	public final int width;
 	public final int height;
 
-	public DungeonSection(int startX,int startY,int width,int height){
-		this.startX=startX;
-		this.startY=startY;
-		this.width=width;
-		this.height=height;
+	public DungeonSection(final int startX, final int startY, final int width,
+			final int height) {
+		this.startX = startX;
+		this.startY = startY;
+		this.width = width;
+		this.height = height;
 	}
 }

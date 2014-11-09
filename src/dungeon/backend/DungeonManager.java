@@ -6,20 +6,20 @@ import dungeon.backend.player.PlayerManager;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 
-public class DungeonManager implements DungeonManagerInterface{
+public class DungeonManager implements DungeonManagerInterface {
 
-	protected final PlayerManager playerManager=new PlayerManager();
+	protected final PlayerManager playerManager = new PlayerManager();
 	protected final DungeonGenerator gen;
 	protected DungeonGraph layout;
 
-	public DungeonManager(DungeonType type){
-		gen=new DungeonGenerator(type);
-		layout=gen.generate();
+	public DungeonManager(final DungeonType type) {
+		gen = new DungeonGenerator(type);
+		layout = gen.generate();
 	}
 
 	@Override
-	public CellType getCellTypeAt(int x, int y) {
-		return layout.getCellTypeAt(x,y);
+	public CellType getCellTypeAt(final int x, final int y) {
+		return layout.getCellTypeAt(x, y);
 	}
 
 	@Override
@@ -54,8 +54,8 @@ public class DungeonManager implements DungeonManagerInterface{
 
 	@Override
 	public void resetKeyPressed() {
-		layout=gen.generate();
-		playerManager.x=0;
-		playerManager.y=0;
+		layout = gen.generate();
+		playerManager.x = 0;
+		playerManager.y = 0;
 	}
 }

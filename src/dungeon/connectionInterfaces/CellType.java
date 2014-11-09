@@ -2,11 +2,11 @@ package dungeon.connectionInterfaces;
 
 public enum CellType {
 
-		Wall(false),Floor(true);
+	Wall(false), Floor(true);
 
-		public final boolean PASSABLE;
+	public final boolean PASSABLE;
 
-		CellType(boolean passable){
-			PASSABLE=passable;
-		}
+	CellType(final boolean passable) {
+		PASSABLE = passable;
+	}
 }

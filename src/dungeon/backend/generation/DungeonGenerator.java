@@ -9,19 +9,21 @@ import dungeon.backend.generation.section.SectionGenerator;
 
 public class DungeonGenerator {
 	public final DungeonType targetType;
-	public DungeonGenerator(DungeonType type){
-		targetType=type;
+
+	public DungeonGenerator(final DungeonType type) {
+		targetType = type;
 	}
+
 	public DungeonGraph generate() {
-		SectionGenerator g=new SectionGenerator();
+		final SectionGenerator g = new SectionGenerator();
 
-		List<DungeonSection> sections=new ArrayList<>();
-		DungeonGraph generationTarget=new DungeonGraph();
+		final List<DungeonSection> sections = new ArrayList<>();
+		final DungeonGraph generationTarget = new DungeonGraph();
 
-		DungeonSection startingRoom=g.generateRoom(-2,-2 ,3, 7, 3, 7);
+		final DungeonSection startingRoom = g.generateRoom(-2, -2, 3, 7, 3, 7);
 		sections.add(startingRoom);
 		generationTarget.makeSectionFloor(startingRoom);
-		//More generation to go here...
+		// More generation to go here...
 
 		return generationTarget;
 	}
