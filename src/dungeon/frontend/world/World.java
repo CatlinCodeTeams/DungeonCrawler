@@ -1,6 +1,7 @@
 package dungeon.frontend.world;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
@@ -18,12 +19,13 @@ public class World extends GameWorld{
 		super(mainManager);
 	}
 
-	boolean inGame = true;
+	boolean inGame = false;
 	
 	//ArrayList<Wall> wallList
 	
 	@Override
 	public void start() {
+
 		
 		loadImage("corner_bottom_left");
 		loadImage("corner_bottom_right");
@@ -73,7 +75,12 @@ public class World extends GameWorld{
 	public void titleDraw(){
 		
 		AdvancedGraphics pen = getPen();
-		pen.setColor(new Color(100, 100,0));
+	
+		pen.setColor(new Color(255, 255, 255));
+		pen.drawRect(0, 0, 299, 199);
+		
+		
+		pen.drawString("A Game About Dungeons.", 10, 50);
 	}
 
 	public void gameDraw() {
