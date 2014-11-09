@@ -26,6 +26,13 @@ public class EnemyManager {
 		this.player=playMan;
 	}
 	public void takeTurn(){
+		List<Enemy> newEnemies=new ArrayList<>();
+		for(Enemy e:currentEnemies){
+			if(e.health>0){
+				newEnemies.add(e);
+			}
+		}
+		currentEnemies=newEnemies;
 		Random aiRandom=new Random();
 		if(currentEnemies.size()<10){
 			List<Point> spawnPoints=world.getAllLocationsOfCellType(CellType.Floor);
