@@ -1,5 +1,7 @@
 package dungeon.backend.player;
 
+import java.io.IOException;
+
 import dungeon.animation.Animateable;
 import dungeon.animation.AnimationFrame;
 import dungeon.animation.character.PlayerAnimation;
@@ -12,6 +14,32 @@ public class PlayerManager extends Animateable{
 
 	@Override
 	public AnimationFrame getCurrentStaticImage() {
-		return PlayerAnimation.staticImage;
+		if(currentDirection==Direction.NORTH){
+			try {
+				return new AnimationFrame("spr_up.png", 0, 0, 0);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}else if(currentDirection==Direction.SOUTH){
+			try {
+				return new AnimationFrame("spr_down.png",0,0,0);
+			} catch(IOException e) {
+				throw new RuntimeException(e);
+			}
+		}else if(currentDirection==Direction.EAST){
+			try {
+				return new AnimationFrame("spr_right.png",0,0,0);
+			} catch(IOException e) {
+				throw new RuntimeException(e);
+			}
+		}else if(currentDirection==Direction.SOUTH){
+			try {
+				return new AnimationFrame("spr_left.png",0,0,0);
+			} catch(IOException e) {
+				throw new RuntimeException(e);
+			}
+		}else{
+			throw new RuntimeException();
+		}
 	}
 }
