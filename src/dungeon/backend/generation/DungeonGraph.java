@@ -2,6 +2,7 @@ package dungeon.backend.generation;
 
 import java.util.Map;
 
+import dungeon.backend.generation.section.DungeonSection;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.util.defualtMap.DefaultMap;
 import dungeon.util.defualtMap.Factory;
@@ -15,6 +16,13 @@ public class DungeonGraph {
 		}
 	});
 
+	public void makeSectionFloor(DungeonSection s){
+		for(int x=0;x<s.width;x++){
+			for(int y=0;y<s.height;y++){
+				makeCellFloor(s.startX+x, s.startY+y);
+			}
+		}
+	}
 	public void makeCellFloor(int x, int y){
 		locations.get(x).put(y, CellType.Floor);
 	}
