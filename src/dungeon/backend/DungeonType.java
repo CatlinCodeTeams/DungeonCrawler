@@ -16,15 +16,15 @@ public enum DungeonType {
 			new SectionCreatorWrapper(60,new SectionCreator(){
 				@Override
 				public DungeonSection getSection(int startX, int startY, Direction d) {
-					int legnth=(int)(10*rgen.nextDouble())+1;
+					int legnth=(int)(5*rgen.nextDouble())+3;
 					if(d==Direction.NORTH){
-						return new RectangleSection(startX,startY-legnth,1,legnth);
+						return new RectangleSection(startX,startY-legnth-1,1,legnth);
 					}
 					if(d==Direction.SOUTH){
 						return new RectangleSection(startX,startY,1,legnth);
 					}
 					if(d==Direction.WEST){
-						return new RectangleSection(startX-legnth,startY,legnth,1);
+						return new RectangleSection(startX-legnth-1,startY,legnth,1);
 					}
 					if(d==Direction.EAST){
 						return new RectangleSection(startX,startY,legnth,1);
@@ -38,16 +38,16 @@ public enum DungeonType {
 
 				@Override
 				public DungeonSection getSection(int startX, int startY, Direction d) {
-					int height=(int)(10*rgen.nextDouble())+1;
-					int width=(int)(10*rgen.nextDouble())+1;
+					int height=(int)(5*rgen.nextDouble())+3;
+					int width=(int)(5*rgen.nextDouble())+3;
 					if(d==Direction.NORTH){
-						return new RectangleSection(startX-width/2,startY-height,width,height);
+						return new RectangleSection(startX-width/2,startY-height-1,width,height);
 					}
 					if(d==Direction.SOUTH){
 						return new RectangleSection(startX-width/2,startY,1,height);
 					}
 					if(d==Direction.WEST){
-						return new RectangleSection(startX-width,startY-height/2,width,1);
+						return new RectangleSection(startX-width-1,startY-height/2,width,1);
 					}
 					if(d==Direction.EAST){
 						return new RectangleSection(startX,startY-height/2,width,1);
