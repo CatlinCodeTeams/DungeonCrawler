@@ -87,6 +87,12 @@ public class World extends GameWorld{
 		if ((isKeyPressed('s'))||(isKeyPressed(40))){
 			mainManager.downKeyPressed();
 		}
+		
+		if (isKeyPressed('m')){
+			viewMap = true;
+		}
+		else
+			viewMap = false;
 	}
 	
 	public void titleUpdate(){
@@ -228,60 +234,68 @@ public class World extends GameWorld{
 		
 		drawImage("light", 0, 0, 330, 220);
 		
-		pen.setColor(new Color(0, 0, 0, 140));
-		pen.fillRect(230, 0, 70+2, 50+2);
+		if (!viewMap){
+			pen.setColor(new Color(0, 0, 0, 140));
+			//pen.fillRect(230, 0, 70+2, 50+2);
 
-		
-		for (int x=-18; x<18; x++){
-			for (int y=-13; y<12; y++){
-				int coordX = pX + x;
-				int coordY = pY + y;
-				
-				pen.setColor(new Color(255, 0 , 0));
-				CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
-
-				if (cellType==CellType.Wall){
+			for (int x=-18; x<18; x++){
+				for (int y=-13; y<12; y++){
+					int coordX = pX + x;
+					int coordY = pY + y;
 					
+					pen.setColor(new Color(255, 0 , 0));
+					CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
+	
+					if (cellType==CellType.Wall){
+						
+						
+						pen.setColor(new Color(255, 255, 255, 150));	
+						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+					}
 					
-					pen.setColor(new Color(255, 255, 255, 150));	
-					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+					else if (cellType==CellType.Floor){
+						pen.setColor(new Color(40, 40,40, 150));
+						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+					}
+					
+					else if (cellType==CellType.OpenDoor){
+						pen.setColor(new Color(40, 200,40, 150));
+						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+					}
+					
+					else if (cellType==CellType.ClosedDoor){
+						pen.setColor(new Color(200, 40,40, 150));
+						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+					}
+					
+					else if (cellType == CellType.ClosedChest){
+						pen.setColor(new Color(40, 40,200, 150));
+						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+					}
+					else if (cellType == CellType.Torch){
+						pen.setColor(new Color(255, 70,40, 150));
+						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+					}
+					
+					pen.setColor(new Color(0,0,0, 100));
+					//pen.drawRect(x*20, y*20, 20, 20);
 				}
 				
-				else if (cellType==CellType.Floor){
-					pen.setColor(new Color(40, 40,40, 150));
-					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
-				}
-				
-				else if (cellType==CellType.OpenDoor){
-					pen.setColor(new Color(40, 200,40, 150));
-					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
-				}
-				
-				else if (cellType==CellType.ClosedDoor){
-					pen.setColor(new Color(200, 40,40, 150));
-					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
-				}
-				
-				else if (cellType == CellType.ClosedChest){
-					pen.setColor(new Color(40, 40,200, 150));
-					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
-				}
-				else if (cellType == CellType.Torch){
-					pen.setColor(new Color(255, 70,40, 150));
-					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
-				}
-				
-				pen.setColor(new Color(0,0,0, 100));
-				//pen.drawRect(x*20, y*20, 20, 20);
 			}
+			pen.setColor(new Color(0, 0, 0, 100));
+			pen.fillRect(230+(18*2)+1, (13*2)+1, 2, 2);
+			
+			pen.setColor(Color.BLUE);
+			pen.fillRect(230+(18*2), (13*2), 2, 2);
+			
+			
+			//pen.setColor()
+			pen.fillRect(150, 180, 150, 20);
 			
 		}
 		
-		pen.setColor(new Color(0, 0, 0, 100));
-		pen.fillRect(230+(18*2)+1, (13*2)+1, 2, 2);
 		
-		pen.setColor(Color.BLUE);
-		pen.fillRect(230+(18*2), (13*2), 2, 2);
+
 		
 		
 
