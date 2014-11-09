@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import dungeon.animation.AnimationFrame;
 import dungeon.connectionInterfaces.CellType;
@@ -11,6 +12,7 @@ import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
 import dungeon.frontend.graphicsSystem.GameWorld;
 import dungeon.util.physics.Point;
+import dungeon.util.physics.Vector;
 
 public class World extends GameWorld{
 
@@ -117,6 +119,28 @@ public class World extends GameWorld{
 					BufferedImage image= getWallImage(coordX, coordY);
 					pen.drawImage(image, x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, null);
 					//pen.fillRect(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					
+					
+					//--------------------------------------------Shadow Casting
+					ArrayList<Point> points = new ArrayList<Point>();
+					Point p1 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment);
+					Point p2 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment+20);
+					Point p3 = new Point(x* 20-currentImage.xDisplacment+20, y*20-currentImage.yDisplacment);
+					Point p4 = new Point(x* 20-currentImage.xDisplacment+20, y*20-currentImage.yDisplacment+20);
+					
+					points.add(p1);
+					points.add(p2);
+					points.add(p3);
+					points.add(p4);
+					
+					Point pLoc = new Point(0,0);
+					for (Point p: points){
+						Vector vec = pLoc.makeVector(p);
+						p.move(vec);
+					}
+					
+					//-----------------------------
+					
 				}
 				
 				else if (cellType == CellType.OpenDoor){
