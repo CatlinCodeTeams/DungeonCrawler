@@ -1,10 +1,12 @@
-package dungeon.frontend.main;
+package dungeon.frontend.world;
 
 import java.awt.Color;
 
+import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
 import dungeon.frontend.graphicsSystem.GameWorld;
+import dungeon.frontend.physics.Point;
 
 public class World extends GameWorld{
 
@@ -29,8 +31,27 @@ public class World extends GameWorld{
 
 	@Override
 	public void draw() {
+		AdvancedGraphics pen = getPen();
+		//drawGridLines();
+		DungeonManagerInterface mainManager = getManager();
+		int pX = mainManager.getPlayerX();
+		int pY = mainManager.getPlayerY();
+		Point playerLocation = new Point(pX, pY);
+		pen.moveCameraPosition(pX-150, pY-100);
+
+		pen.drawCenteredCircle(0, 0, 32);
+		for (int x=-7; x<7; x++){
+			for (int y=-5; y<5; y++){
+				int coordX = pX + x;
+				int coordY = pY + y;
+				
+				CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
+			}
+			
+		}
 		
-		drawGridLines();
+		
+		
 	}
 	
 	public void drawGridLines(){
