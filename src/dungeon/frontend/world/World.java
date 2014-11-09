@@ -169,7 +169,7 @@ public class World extends GameWorld{
 
 
 					//--------------------------------------------Shadow Casting
-					ArrayList<Point> points = new ArrayList<Point>();
+/*					ArrayList<Point> points = new ArrayList<Point>();
 					ArrayList<Point> points2 = new ArrayList<Point>();
 					Point p1 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment);
 					Point p2 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment+20);
@@ -193,8 +193,18 @@ public class World extends GameWorld{
 					}
 					
 					
-					//int[] xPoints= []
-					//pen.drawPolygon(xPoints, yPoints, nPoints);
+					int[] xPoints= new int[8];
+					for (int i=0; i<4; i++){
+						xPoints[i] = (int)points.get(i).getX();
+						xPoints[i+4] = (int)points2.get(i).getX();
+					}
+					
+					int[] yPoints= new int[8];
+					for (int i=0; i<4; i++){
+						yPoints[i] = (int)points.get(i).getY();
+						yPoints[i+4] = (int)points2.get(i).getY();
+					}
+					pen.drawPolygon(xPoints, yPoints, 8);*/
 
 					//-----------------------------
 
@@ -203,7 +213,7 @@ public class World extends GameWorld{
 				else if (cellType == CellType.OpenDoor){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					
-					if ((wallBelow(coordX, coordY))&&(wallAbove(coordX, coordY))){
+					if ((wallBelow(coordX, coordY)||(doorBelow(coordX, coordY)))&&(wallAbove(coordX, coordY)||(doorAbove(coordX, coordY)))){
 						drawImage("OpenDoorRight", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					}
 					else
@@ -214,7 +224,7 @@ public class World extends GameWorld{
 				else if (cellType == CellType.ClosedDoor){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					
-					if ((wallBelow(coordX, coordY))&&(wallAbove(coordX, coordY))){
+					if ((wallBelow(coordX, coordY)||(doorBelow(coordX, coordY)))&&(wallAbove(coordX, coordY)||(doorAbove(coordX, coordY)))){
 						drawImage("DoorSide", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					}
 					else
@@ -366,6 +376,12 @@ public class World extends GameWorld{
 			//health bar
 			pen.setColor(new Color(200, 20, 20, 200));
 			pen.fillRect(156 + (140-width), 183, width, 15);
+			
+			
+			
+			//Hud backings
+			//pen.setColor(new Color(200, 200, 200, 200));
+			//pen.fillRect(0, 180, 20, 100);
 
 
 		}
@@ -544,6 +560,42 @@ public class World extends GameWorld{
 	public boolean wallLeft(int coordX, int coordY){
 		DungeonManagerInterface m = getManager();
 		if (m.getCellTypeAt(coordX-1, coordY)==CellType.Wall){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean doorAbove(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if ((m.getCellTypeAt(coordX, coordY-1)==CellType.OpenDoor)||(m.getCellTypeAt(coordX, coordY+1)==CellType.ClosedDoor)){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean doorBelow(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if ((m.getCellTypeAt(coordX, coordY+1)==CellType.OpenDoor)||(m.getCellTypeAt(coordX, coordY+1)==CellType.ClosedDoor)){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean doorLeft(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if ((m.getCellTypeAt(coordX-1, coordY)==CellType.OpenDoor)||(m.getCellTypeAt(coordX, coordY+1)==CellType.ClosedDoor)){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean doorRight(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if ((m.getCellTypeAt(coordX+1, coordY)==CellType.OpenDoor)||(m.getCellTypeAt(coordX, coordY+1)==CellType.ClosedDoor)){
 			return true;
 		}
 		else
