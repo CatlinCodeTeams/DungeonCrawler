@@ -27,7 +27,7 @@ public class World extends GameWorld{
 		
 		loadImage("corner_bottom_left");
 		loadImage("corner_bottom_right");
-		loadImage("corner_top_left.png");
+		loadImage("corner_top_left");
 		loadImage("corner_top_right");
 		loadImage("end_bottom");
 		loadImage("end_left");
@@ -53,14 +53,14 @@ public class World extends GameWorld{
 	public BufferedImage getWallImage(int cX, int cY){
 		DungeonManagerInterface m = getManager();
 		
-		boolean below = wallBelow(cX, cY);
-		boolean above = wallAbove(cX, cY);
-		boolean right = wallRight(cX, cY);
-		boolean left = wallLeft(cX, cY);
+		boolean below = (wallBelow(cX, cY));
+		boolean above = (wallAbove(cX, cY));
+		boolean right = (wallRight(cX, cY));
+		boolean left = (wallLeft(cX, cY));
 		
 		String image;
 		
-		//Singles
+		//Singles----------------------------------
 		if ((below)&&(!above)&&(!right)&&(!left)){
 			image = "end_top";
 		}
@@ -73,6 +73,62 @@ public class World extends GameWorld{
 		else if ((!below)&&(!above)&&(!right)&&(left)){
 			image = "end_right";
 		}
+		//-------------------------------------------
+		
+		
+		//T-sections-------------------------------------
+		else if ((below)&&(above)&&(right)&&(!left)){
+			image = "t_right";
+		}
+		else if ((below)&&(above)&&(!right)&&(left)){
+			image = "t_left";
+		}
+		else if ((below)&&(!above)&&(right)&&(left)){
+			image = "t_bottom";
+		}
+		else if ((!below)&&(above)&&(right)&&(left)){
+			image = "t_top";
+		}
+		//--------------------------------------------
+		
+		//two-corners------------------------------
+		else if ((below)&&(!above)&&(right)&&(!left)){
+			image = "corner_top_left";
+		}
+		
+		else if ((below)&&(!above)&&(!right)&&(left)){
+			image = "corner_top_right";
+		}
+		
+		else if ((!below)&&(above)&&(right)&&(!left)){
+			image = "corner_bottom_right";
+		}
+		
+		else if ((!below)&&(above)&&(!right)&&(!left)){
+			image = "corner_bottom_left";
+		}
+		//-------------------------------------
+		
+		//singles--------------------------
+		else if ((!below)&&(!above)&&(!right)&&(!left)){
+			image = "single_piece";
+		}
+		//-----------------------------------------
+		
+		//horizontals/verticals------------------------------
+		else if ((!below)&&(!above)&&(right)&&(!left)){
+			image = "mid_horizontal";
+		}
+		else if ((below)&&(above)&&(!right)&&(!left)){
+			image = "mid_vertical";
+		}
+		
+		//alls----------
+		else if ((below)&&(above)&&(right)&&(left)){
+			image = "intersection_piece";
+		}
+		
+		
 		else
 			image = "single_piece";
 		
@@ -145,7 +201,9 @@ public class World extends GameWorld{
 				}
 				else if (cellType==CellType.Wall){
 					pen.setColor(new Color(100, 100, 100));	
-					pen.fillRect(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					BufferedImage image= getWallImage(coordX, coordY);
+					pen.drawImage(image, x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, null);
+					//pen.fillRect(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
 				
 				
