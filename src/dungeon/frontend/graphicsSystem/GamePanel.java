@@ -15,7 +15,7 @@ import java.util.TimerTask;
 
 import javax.swing.JPanel;
 
-import dungeon.frontend.physics.Point;
+import dungeon.util.physics.Point;
 
 public class GamePanel extends JPanel implements MouseListener,
 		MouseMotionListener, KeyListener {

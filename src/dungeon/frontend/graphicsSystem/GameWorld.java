@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.assets.FileLoader;
-import dungeon.frontend.physics.Point;
+import dungeon.util.physics.Point;
 
 //World object is where all the game's information is stored, as well as all of its
 //start, update, and draw functions are.

@@ -14,8 +14,8 @@ import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 
-import dungeon.frontend.physics.Point;
-import dungeon.frontend.physics.Vector;
+import dungeon.util.physics.Point;
+import dungeon.util.physics.Vector;
 
 public class AdvancedGraphics {
 

@@ -1,4 +1,4 @@
-package dungeon.frontend.physics;
+package dungeon.util.physics;
 
 public class Vector {
 

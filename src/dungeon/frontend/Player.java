@@ -3,8 +3,8 @@ package dungeon.frontend;
 import dungeon.animation.AnimationFrame;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
-import dungeon.frontend.physics.Point;
 import dungeon.frontend.world.World;
+import dungeon.util.physics.Point;
 
 public class Player {
 

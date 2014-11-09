@@ -9,7 +9,7 @@ import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
 import dungeon.frontend.graphicsSystem.GameWorld;
-import dungeon.frontend.physics.Point;
+import dungeon.util.physics.Point;
 
 public class World extends GameWorld{
 
