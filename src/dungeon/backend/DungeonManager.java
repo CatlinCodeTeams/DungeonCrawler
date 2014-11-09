@@ -1,5 +1,6 @@
 package dungeon.backend;
 
+import dungeon.animation.Animateable;
 import dungeon.backend.generation.DungeonGenerator;
 import dungeon.backend.generation.DungeonGraph;
 import dungeon.backend.player.PlayerManager;
@@ -34,6 +35,7 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void upKeyPressed() {
+		playerManager.tryAddAnimationInstance(PlayerManager.walkUp.copy());
 		playerManager.y--;
 	}
 
@@ -57,5 +59,10 @@ public class DungeonManager implements DungeonManagerInterface {
 		layout = gen.generate();
 		playerManager.x = 0;
 		playerManager.y = 0;
+	}
+
+	@Override
+	public Animateable getPlayerAnimations() {
+		return playerManager;
 	}
 }

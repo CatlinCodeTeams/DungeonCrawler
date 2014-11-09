@@ -1,5 +1,7 @@
 package dungeon.connectionInterfaces;
 
+import dungeon.animation.Animateable;
+
 public interface DungeonManagerInterface {
 	public CellType getCellTypeAt(int x, int y);
 
@@ -16,4 +18,6 @@ public interface DungeonManagerInterface {
 	public void rightKeyPressed();
 
 	public void resetKeyPressed();
+
+	public Animateable getPlayerAnimations();
 }
