@@ -1,8 +1,11 @@
 package dungeon.connectionInterfaces;
 
 import dungeon.animation.Animateable;
+import dungeon.backend.enemy.Enemy;
 
 public interface DungeonManagerInterface {
+	public Enemy getEnemyAt(int x,int y);
+
 	public CellType getCellTypeAt(int x, int y);
 
 	public int getPlayerX();
