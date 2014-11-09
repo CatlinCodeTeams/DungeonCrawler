@@ -8,11 +8,13 @@ import dungeon.connectionInterfaces.DungeonManagerInterface;
 
 public class DungeonManager implements DungeonManagerInterface{
 
-	protected final DungeonGraph layout;
 	protected final PlayerManager playerManager=new PlayerManager();
+	protected final DungeonGenerator gen;
+	protected DungeonGraph layout;
 
 	public DungeonManager(DungeonType type){
-		layout=new DungeonGenerator(type).generate();
+		gen=new DungeonGenerator(type);
+		layout=gen.generate();
 	}
 
 	@Override
@@ -48,5 +50,10 @@ public class DungeonManager implements DungeonManagerInterface{
 	@Override
 	public void rightKeyPressed() {
 		playerManager.x++;
+	}
+
+	@Override
+	public void resetKeyPressed() {
+		layout=gen.generate();
 	}
 }

@@ -14,4 +14,6 @@ public interface DungeonManagerInterface {
 	public void leftKeyPressed();
 
 	public void rightKeyPressed();
+
+	public void resetKeyPressed();
 }
