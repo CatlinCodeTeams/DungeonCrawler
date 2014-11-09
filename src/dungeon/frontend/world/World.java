@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import dungeon.animation.AnimationFrame;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
+import dungeon.frontend.Camera;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
 import dungeon.frontend.graphicsSystem.GameWorld;
 import dungeon.frontend.physics.Point;
@@ -19,18 +20,27 @@ public class World extends GameWorld{
 	}
 
 	int angle;
+	Camera cam;
 	
 	//ArrayList<Wall> wallList
 	
 	@Override
 	public void start() {
 		angle = 0;
+		cam = new Camera(new Point(0,0), 0, 0);
 		
 	}
 
 	@Override
 	public void update() {
 		angle ++;
+		
+		DungeonManagerInterface mainManager = getManager();
+		int pX = mainManager.getPlayerX();
+		int pY = mainManager.getPlayerY();
+		Point playerLocation = new Point(pX, pY);
+		
+		cam.update(playerLocation);
 		
 	}
 
@@ -43,6 +53,9 @@ public class World extends GameWorld{
 		int pY = mainManager.getPlayerY();
 		Point playerLocation = new Point(pX, pY);
 		
+
+		
+		//pen.moveCameraPosition((int)(-1*(cam.getX())), (int)(-1*(cam.getY())));
 		pen.moveCameraPosition(-150, -100);
 		
 		
