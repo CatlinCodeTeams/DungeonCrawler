@@ -55,5 +55,7 @@ public class DungeonManager implements DungeonManagerInterface{
 	@Override
 	public void resetKeyPressed() {
 		layout=gen.generate();
+		playerManager.x=0;
+		playerManager.y=0;
 	}
 }
