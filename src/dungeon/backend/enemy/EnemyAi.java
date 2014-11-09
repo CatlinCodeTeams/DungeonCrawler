@@ -13,29 +13,41 @@ public enum EnemyAi {
 			case 0:
 				if(g.getCellTypeAt(e.x+1, e.y).PASSABLE){
 					return Direction.EAST;
+				}else if(g.getCellTypeAt(e.x-1, e.y).PASSABLE){
+					return Direction.WEST;
 				}
 				break;
 			case 1:
 				if(g.getCellTypeAt(e.x-1, e.y).PASSABLE){
 					return Direction.WEST;
+				}else if(g.getCellTypeAt(e.x+1, e.y).PASSABLE){
+					return Direction.EAST;
 				}
 				break;
 			case 2:
 				if(g.getCellTypeAt(e.x, e.y+1).PASSABLE){
 					return Direction.NORTH;
+				}else if(g.getCellTypeAt(e.x, e.y-1).PASSABLE){
+					return Direction.SOUTH;
+				}else if(g.getCellTypeAt(e.x+1, e.y).PASSABLE){
+					return Direction.EAST;
+				}else if(g.getCellTypeAt(e.x-1, e.y).PASSABLE){
+					return Direction.WEST;
 				}
 				break;
 			case 3:
 				if(g.getCellTypeAt(e.x, e.y-1).PASSABLE){
 					return Direction.SOUTH;
+				}else if(g.getCellTypeAt(e.x, e.y+1).PASSABLE){
+					return Direction.NORTH;
+				}else if(g.getCellTypeAt(e.x-1, e.y).PASSABLE){
+					return Direction.WEST;
+				}else if(g.getCellTypeAt(e.x+1, e.y).PASSABLE){
+					return Direction.EAST;
 				}
 				break;
 			}
-			try{
-				return toMove(e,g,aiRandom);
-			}catch(StackOverflowError e2){
-				return null;
-			}
+			return null;
 		}
 	});
 

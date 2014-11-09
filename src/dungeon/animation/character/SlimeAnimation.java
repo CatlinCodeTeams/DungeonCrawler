@@ -66,7 +66,7 @@ public class SlimeAnimation {
 	public static AnimationInstance still;
 	static{
 		try{
-		new ReapeatingAnimationInstance(new AnimationFrame[]{new AnimationFrame("Slime1.png", 10, 0, 0)});
+			still=new ReapeatingAnimationInstance(new AnimationFrame[]{new AnimationFrame("Slime1.png", 10, 0, 0)});
 		}catch (IOException e){
 			throw new RuntimeException(e);
 		}

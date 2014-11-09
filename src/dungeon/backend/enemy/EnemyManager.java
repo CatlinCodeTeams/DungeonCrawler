@@ -39,6 +39,9 @@ public class EnemyManager {
 		}
 		for(Enemy e:currentEnemies){
 			Direction move=e.type.ai.control.toMove(e, world, aiRandom);
+			if (move==null){
+				continue;
+			}
 			switch(move){
 			case NORTH:
 				e.y--;

@@ -1,12 +1,12 @@
 package dungeon.frontend.world;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import dungeon.animation.AnimationFrame;
+import dungeon.backend.enemy.Enemy;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
@@ -23,23 +23,23 @@ public class World extends GameWorld{
 
 	boolean inGame = false;
 	boolean viewMap = false;
-	
+
 	int fadeIn = 255;
-	
+
 	//ArrayList<Wall> wallList
-	
+
 	@Override
 	public void start() {
-		
+
 		loadImage("ChestClosed");
 		loadImage("ChestOpened");
-		
+
 		loadImage("titleScreen");
-		
+
 		loadImage("Ladder");
 
 		loadImage("light");
-		
+
 		loadImage("Torch0");
 		loadImage("Torch1");
 		loadImage("Torch2");
@@ -48,7 +48,7 @@ public class World extends GameWorld{
 		loadImage("large_stone_tile");
 		loadImage("Door");
 		loadImage("DoorOpen");
-		
+
 		loadImage("corner_bottom_left");
 		loadImage("corner_bottom_right");
 		loadImage("corner_top_left");
@@ -64,7 +64,7 @@ public class World extends GameWorld{
 		loadImage("t_bottom");
 		loadImage("t_left");
 		loadImage("t_right");
-		loadImage("t_top");	
+		loadImage("t_top");
 	}
 
 	@Override
@@ -75,14 +75,14 @@ public class World extends GameWorld{
 		}
 		else
 			titleUpdate();
-		
+
 
 	}
-	
+
 	public void gameUpdate(){
-		
+
 		DungeonManagerInterface mainManager = getManager();
-		
+
 		if ((isKeyPressed('a'))||(isKeyPressed(37))){
 			mainManager.leftKeyPressed();
 		}
@@ -95,21 +95,21 @@ public class World extends GameWorld{
 		if ((isKeyPressed('s'))||(isKeyPressed(40))){
 			mainManager.downKeyPressed();
 		}
-		
+
 		if (isKeyPressed('m')){
 			viewMap = true;
 		}
 		else
 			viewMap = false;
 	}
-	
+
 	public void titleUpdate(){
 		if (fadeIn>0){
 			fadeIn--;
 		}
 	}
-	
-	
+
+
 	@Override
 	public void draw(){
 		if (inGame){
@@ -118,19 +118,19 @@ public class World extends GameWorld{
 		else
 			titleDraw();
 	}
-	
+
 
 	public void titleDraw(){
-		
+
 		AdvancedGraphics pen = getPen();
-	
+
 		pen.setColor(new Color(255, 255, 255));
 		pen.drawRect(0, 0, 299, 199);
-		
-		
+
+
 		drawImage("titleScreen", 0, 0, 300, 200);
-		
-		
+
+
 		pen.setColor(new Color(0,0,0,fadeIn));
 		pen.fillRect(0, 0, 300, 200);
 	}
@@ -142,16 +142,16 @@ public class World extends GameWorld{
 		int pX = mainManager.getPlayerX();
 		int pY = mainManager.getPlayerY();
 		Point playerLocation = new Point(pX, pY);
-		
 
-		
+
+
 		pen.moveCameraPosition(-150, -100);
 		AnimationFrame currentImage = mainManager.getPlayerAnimations().getNextImage();
 		for (int x=-9; x<9; x++){
 			for (int y=-6; y<6; y++){
 				int coordX = pX + x;
 				int coordY = pY + y;
-				
+
 				pen.setColor(new Color(255, 0 , 0));
 				CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
 				if (cellType==CellType.Floor){
@@ -160,94 +160,111 @@ public class World extends GameWorld{
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
 				else if (cellType==CellType.Wall){
-					pen.setColor(new Color(100, 100, 100));	
+					pen.setColor(new Color(100, 100, 100));
 					BufferedImage image= getWallImage(coordX, coordY);
 					pen.drawImage(image, x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, null);
 					//pen.fillRect(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
-					
-					
+
+
 					//--------------------------------------------Shadow Casting
 					ArrayList<Point> points = new ArrayList<Point>();
 					Point p1 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment);
 					Point p2 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment+20);
 					Point p3 = new Point(x* 20-currentImage.xDisplacment+20, y*20-currentImage.yDisplacment);
 					Point p4 = new Point(x* 20-currentImage.xDisplacment+20, y*20-currentImage.yDisplacment+20);
-					
+
 					points.add(p1);
 					points.add(p2);
 					points.add(p3);
 					points.add(p4);
-					
+
 					Point pLoc = new Point(0,0);
 					for (Point p: points){
 						Vector vec = pLoc.makeVector(p);
 						p.move(vec);
 					}
-					
+
 					//-----------------------------
-					
+
 				}
-				
+
 				else if (cellType == CellType.OpenDoor){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("DoorOpen", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
-					
+
 				}
-				
+
 				else if (cellType == CellType.ClosedDoor){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("Door", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
-					
+
 				}
-				
+
 				else if (cellType == CellType.ClosedChest){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("ChestClosed", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
-				
+
 				else if (cellType == CellType.OpenChest){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("ChestOpened", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
-				
+
 				else if (cellType == CellType.Stair){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("Ladder", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
-				
+
 				else if (cellType == CellType.ExtinguishedTorch){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("TorchOff", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
-					
+
 				}
-				
+
 				else if (cellType == CellType.Torch){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("Torch0", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
-				
-				
+
+
 				pen.setColor(new Color(0,0,0, 100));
 				//pen.drawRect(x*20, y*20, 20, 20);
 			}
-			
+
 		}
-		
+		boolean anyAnimating=false;
+		for (int x=-9; x<9; x++){
+			for (int y=-6; y<6; y++){
+				int coordX = pX + x;
+				int coordY = pY + y;
+				Enemy target=mainManager.getEnemyAt(coordX, coordY);
+				if (target!=null){
+					if(target.isAnimating()){
+						anyAnimating=true;
+					}
+					pen.drawImage(target.getNextImage().image, x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, null);
+				}
+			}
+		}
+		if(!anyAnimating){
+			mainManager.confirmNoVisableEnemyAnimations();
+		}
+
 		//Drawing the player-------
 		//pen.setColor(new Color(0, 0, 255));
 		//pen.fillCircle(0, 0, 20);
-		
+
 		pen.setColor(new Color(0,0,0,100));
 		pen.fillOval(2, 12, 16, 10);
 		pen.drawImage(currentImage.image, 0, 0, null);
 		//
-		
-		
+
+
 		//Reset Camera for HUD
 		pen.moveCameraPosition(150, 100);
-		
+
 		drawImage("light", 0, 0, 330, 220);
-		
+
 		if (!viewMap){
 			pen.setColor(new Color(0, 0, 0, 140));
 			pen.fillRect(230, 0, 70+2, 50+2);
@@ -256,32 +273,32 @@ public class World extends GameWorld{
 				for (int y=-13; y<12; y++){
 					int coordX = pX + x;
 					int coordY = pY + y;
-					
+
 					pen.setColor(new Color(255, 0 , 0));
 					CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
-	
+
 					if (cellType==CellType.Wall){
-						
-						
-						pen.setColor(new Color(255, 255, 255, 150));	
+
+
+						pen.setColor(new Color(255, 255, 255, 150));
 						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 					}
-					
+
 					else if (cellType==CellType.Floor){
 						pen.setColor(new Color(40, 40,40, 150));
 						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 					}
-					
+
 					else if (cellType==CellType.OpenDoor){
 						pen.setColor(new Color(40, 200,40, 150));
 						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 					}
-					
+
 					else if (cellType==CellType.ClosedDoor){
 						pen.setColor(new Color(200, 40,40, 150));
 						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 					}
-					
+
 					else if (cellType == CellType.ClosedChest){
 						pen.setColor(new Color(40, 40,200, 150));
 						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
@@ -290,56 +307,56 @@ public class World extends GameWorld{
 						pen.setColor(new Color(255, 70,40, 150));
 						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 					}
-					
+
 					pen.setColor(new Color(0,0,0, 100));
 					//pen.drawRect(x*20, y*20, 20, 20);
 				}
-				
+
 			}
 			pen.setColor(new Color(0, 0, 0, 100));
 			pen.fillRect(230+(18*2)+1, (13*2)+1, 2, 2);
-			
+
 			pen.setColor(Color.BLUE);
 			pen.fillRect(230+(18*2), (13*2), 2, 2);
-			
-			
+
+
 			//health bar shadow
 			pen.setColor(new Color(0, 0, 0, 140));
 			pen.fillRect(150+2, 180-3, 150, 20);
-			
+
 			//health bar backing
 			pen.setColor(new Color(200, 200, 200, 200));
 			pen.fillRect(150, 180, 150, 20);
-			
-			
+
+
 			double health = mainManager.getCurrentPlayerHealth();
 			double maxHealth = 1000;
-			
+
 			double percent = health/maxHealth;
 			int width = (int)(140*percent);
-			
-			
+
+
 			//health bar slot
 			pen.setColor(new Color(0, 0, 0, 60));
 			pen.fillRect(156 , 183, 140, 15);
-			
+
 			//health bar
 			pen.setColor(new Color(200, 20, 20, 200));
 			pen.fillRect(156 + (140-width), 183, width, 15);
 
-			
+
 		}
-		
-		
 
-		
-		
 
-		
-		
-		
+
+
+
+
+
+
+
 	}
-	
+
 	public void drawGridLines(){
 		AdvancedGraphics pen = getPen();
 		for (int x=0; x<15; x++){
@@ -349,16 +366,16 @@ public class World extends GameWorld{
 			pen.drawLine(0, 20*y, 300, 20*y);
 		}
 	}
-	
+
 	@Override
 	public void keyTriggered(KeyEvent event){
-		
+
 		if (!inGame){
 			inGame = true;
 		}
-		
+
 		DungeonManagerInterface mainManager = getManager();
-		
+
 		//Left
 		if ((event.getExtendedKeyCode()==37)||(event.getKeyChar()=='a')){
 			mainManager.leftKeyPressed();
@@ -378,23 +395,23 @@ public class World extends GameWorld{
 		if (event.getKeyChar()=='r'){
 			mainManager.resetKeyPressed();
 		}
-		
+
 		if (event.getKeyChar()==' '){
 			mainManager.interactKeyPressed();
 		}
-			
+
 	}
-	
+
 	public BufferedImage getWallImage(int cX, int cY){
 		DungeonManagerInterface m = getManager();
-		
+
 		boolean below = (wallBelow(cX, cY));
 		boolean above = (wallAbove(cX, cY));
 		boolean right = (wallRight(cX, cY));
 		boolean left = (wallLeft(cX, cY));
-		
+
 		String image;
-		
+
 		//Singles----------------------------------
 		if ((below)&&(!above)&&(!right)&&(!left)){
 			image = "end_top";
@@ -409,8 +426,8 @@ public class World extends GameWorld{
 			image = "end_right";
 		}
 		//-------------------------------------------
-		
-		
+
+
 		//T-sections-------------------------------------
 		else if ((below)&&(above)&&(right)&&(!left)){
 			image = "t_right";
@@ -425,31 +442,31 @@ public class World extends GameWorld{
 			image = "t_top";
 		}
 		//--------------------------------------------
-		
+
 		//two-corners------------------------------
 		else if ((!below)&&(above)&&(!right)&&(left)){
 			image = "corner_bottom_right";
 		}
-		
+
 		else if ((!below)&&(above)&&(right)&&(!left)){
 			image = "corner_bottom_left";
 		}
-		
+
 		else if ((below)&&(!above)&&(!right)&&(left)){
 			image = "corner_top_right";
 		}
-		
+
 		else if ((below)&&(!above)&&(right)&&(!left)){
 			image = "corner_top_left";
 		}
 		//-------------------------------------
-		
+
 		//singles--------------------------
 		else if ((!below)&&(!above)&&(!right)&&(!left)){
 			image = "single_piece";
 		}
 		//-----------------------------------------
-		
+
 		//horizontals/verticals------------------------------
 		else if ((!below)&&(!above)&&(right)&&(left)){
 			image = "mid_horizontal";
@@ -457,22 +474,22 @@ public class World extends GameWorld{
 		else if ((below)&&(above)&&(!right)&&(!left)){
 			image = "mid_vertical";
 		}
-		
+
 		//alls----------
 		else if ((below)&&(above)&&(right)&&(left)){
 			image = "intersection_piece";
 		}
-		
-		
+
+
 		else
 			image = "single_piece";
-		
+
 		BufferedImage img = getImage(image);
 		return img;
-		
-		
+
+
 	}
-	
+
 	public boolean wallBelow(int coordX, int coordY){
 		DungeonManagerInterface m = getManager();
 		if (m.getCellTypeAt(coordX, coordY+1)==CellType.Wall){
@@ -481,7 +498,7 @@ public class World extends GameWorld{
 		else
 			return false;
 	}
-	
+
 	public boolean wallAbove(int coordX, int coordY){
 		DungeonManagerInterface m = getManager();
 		if (m.getCellTypeAt(coordX, coordY-1)==CellType.Wall){
@@ -490,7 +507,7 @@ public class World extends GameWorld{
 		else
 			return false;
 	}
-	
+
 	public boolean wallRight(int coordX, int coordY){
 		DungeonManagerInterface m = getManager();
 		if (m.getCellTypeAt(coordX+1, coordY)==CellType.Wall){
@@ -499,8 +516,8 @@ public class World extends GameWorld{
 		else
 			return false;
 	}
-	
-	
+
+
 	public boolean wallLeft(int coordX, int coordY){
 		DungeonManagerInterface m = getManager();
 		if (m.getCellTypeAt(coordX-1, coordY)==CellType.Wall){
