@@ -68,8 +68,7 @@ public class DungeonManager implements DungeonManagerInterface {
 			if(layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).PASSABLE && enemyMan.getEnemyAt(getPlayerX(),getPlayerY()+1)==null){
 				playerManager.tryAddAnimationInstance(PlayerAnimation.walkDown.copy());
 				playerManager.y++;
-				enemyMan.queueForTurn(playerManager);
-			}
+				enemyMan.queueForTurn(playerManager);			}
 			playerManager.currentDirection=Direction.SOUTH;
 		}
 	}
@@ -104,24 +103,29 @@ public class DungeonManager implements DungeonManagerInterface {
 			if(playerManager.currentDirection==Direction.NORTH){
 				if(enemyMan.getEnemyAt(getPlayerX(), getPlayerY()-1)!=null){
 					playerManager.tryAddAnimationInstance(PlayerAnimation.attackUp.copy());
+					enemyMan.getEnemyAt(getPlayerX(),getPlayerY()+1).health-=10;
 				}else
 				layout.makeCellType(getPlayerX(), getPlayerY()-1,layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).transform);
 			}
 			if(playerManager.currentDirection==Direction.SOUTH){
 				if(enemyMan.getEnemyAt(getPlayerX(), getPlayerY()+1)!=null){
 					playerManager.tryAddAnimationInstance(PlayerAnimation.attackDown.copy());
+					enemyMan.getEnemyAt(getPlayerX(),getPlayerY()+1).health-=10;
+
 				}else
 				layout.makeCellType(getPlayerX(), getPlayerY()+1,layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).transform);
 			}
 			if(playerManager.currentDirection==Direction.EAST){
 				if(enemyMan.getEnemyAt(getPlayerX()+1, getPlayerY())!=null){
 					playerManager.tryAddAnimationInstance(PlayerAnimation.attackRight.copy());
+					enemyMan.getEnemyAt(getPlayerX()+1,getPlayerY()).health-=10;
 				}else
 				layout.makeCellType(getPlayerX()+1, getPlayerY(),layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).transform);
 			}
 			if(playerManager.currentDirection==Direction.WEST){
 				if(enemyMan.getEnemyAt(getPlayerX()-1, getPlayerY())!=null){
 					playerManager.tryAddAnimationInstance(PlayerAnimation.attackLeft.copy());
+					enemyMan.getEnemyAt(getPlayerX()-1,getPlayerY()).health-=10;
 				}else
 				layout.makeCellType(getPlayerX()-1, getPlayerY(),layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).transform);
 			}
