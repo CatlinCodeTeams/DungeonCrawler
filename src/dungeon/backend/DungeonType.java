@@ -16,7 +16,7 @@ public enum DungeonType {
 			new SectionCreatorWrapper(60,new SectionCreator(){
 				@Override
 				public DungeonSection getSection(int startX, int startY, Direction d) {
-					int legnth=(int)(5*rgen.nextDouble())+3;
+					int legnth=(int)(20*Math.abs(rgen.nextGaussian()))+3;
 					if(d==Direction.NORTH){
 						return new RectangleSection(startX,startY-legnth+1,1,legnth);
 					}
