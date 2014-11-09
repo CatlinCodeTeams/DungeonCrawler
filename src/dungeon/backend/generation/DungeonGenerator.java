@@ -18,7 +18,7 @@ public class DungeonGenerator {
 		List<DungeonSection> sections=new ArrayList<>();
 		DungeonGraph generationTarget=new DungeonGraph();
 
-		DungeonSection startingRoom=g.generateRoom(-2,-2,3, 10, 3, 10);
+		DungeonSection startingRoom=g.generateRoom(-2,-2 ,3, 7, 3, 7);
 		sections.add(startingRoom);
 		generationTarget.makeSectionFloor(startingRoom);
 		//More generation to go here...
