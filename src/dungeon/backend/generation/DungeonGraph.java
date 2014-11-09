@@ -25,10 +25,8 @@ public class DungeonGraph {
 	private int minY;
 
 	public void makeSectionFloor(final DungeonSection s) {
-		for (int x = 0; x < s.width; x++) {
-			for (int y = 0; y < s.height; y++) {
-				makeCellFloor(s.startX + x, s.startY + y);
-			}
+		for(Point p:s.getContents()){
+			makeCellFloor((int)p.getX(),(int)p.getY());
 		}
 	}
 
