@@ -1,6 +1,7 @@
 package dungeon.backend;
 
 import dungeon.animation.Animateable;
+import dungeon.animation.character.PlayerAnimation;
 import dungeon.backend.generation.DungeonGenerator;
 import dungeon.backend.generation.DungeonGraph;
 import dungeon.backend.player.PlayerManager;
@@ -35,13 +36,18 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void upKeyPressed() {
-		playerManager.tryAddAnimationInstance(PlayerManager.walkUp.copy());
-		playerManager.y--;
+		if(!playerManager.isAnimating()){
+			playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
+			playerManager.y--;
+		}
 	}
 
 	@Override
 	public void downKeyPressed() {
-		playerManager.y++;
+		if(!playerManager.isAnimating()){
+			playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
+			playerManager.y++;
+		}
 	}
 
 	@Override
