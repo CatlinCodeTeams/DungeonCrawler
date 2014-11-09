@@ -2,17 +2,26 @@ package dungeon.connectionInterfaces;
 
 public enum CellType {
 
-	Floor(true), Stair(true), OpenDoor(true), ClosedDoor(false), Wall(false), Torch(false), OpenChest(false), ClosedChest(false);
+	Floor(true), Stair(true), ClosedDoor(false), OpenDoor(true), Wall(false), Torch(false), ExtinguishedTorch(false), OpenChest(false), ClosedChest(false);
+	static{
+		ClosedDoor.setTransform(OpenDoor);
+		OpenDoor.setTransform(ClosedDoor);
+
+		Torch.setTransform(ExtinguishedTorch);
+		ExtinguishedTorch.setTransform(Torch);
+
+		OpenChest.setTransform(ClosedChest);
+		ClosedChest.setTransform(OpenChest);
+	}
 
 	public final boolean PASSABLE;
-	public final CellType transform;
+	public CellType transform;
 
 	CellType(final boolean passable) {
-		this(passable,null);
+		PASSABLE=passable;
+		transform=this;
 	}
-	CellType(final boolean passable,CellType interactTransform){
-		PASSABLE = passable;
-		transform=interactTransform==null?this:interactTransform;
-
+	public void setTransform(CellType type){
+		transform=type;
 	}
 }
