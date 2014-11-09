@@ -289,8 +289,23 @@ public class World extends GameWorld{
 			pen.fillRect(230+(18*2), (13*2), 2, 2);
 			
 			
-			//pen.setColor()
+			//health bar shadow
+			pen.setColor(new Color(0, 0, 0, 140));
+			pen.fillRect(150+2, 180-3, 150, 20);
+			
+			//health bar backing
+			pen.setColor(new Color(200, 200, 200, 200));
 			pen.fillRect(150, 180, 150, 20);
+			
+			
+			int health = 100;
+			int maxHealth = 100;
+			
+			double percent = health/maxHealth;
+			
+			//health bar
+			pen.setColor(new Color(200, 20, 20, 200));
+			pen.fillRect(156, 183, 140, 15);
 			
 		}
 		
