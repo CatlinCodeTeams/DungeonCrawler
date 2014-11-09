@@ -11,6 +11,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
@@ -97,9 +98,10 @@ public abstract class GameWorld implements GameWorldInterface {
 
 	public void loadImage(final String name) {
 		try {
-			imageTable.put(name, ImageIO.read(new File("../assests/"+name+".png")));
+			imageTable.put(name, ImageIO.read(new File("assets\\"+name+".png")));
 		} catch (final IOException e) {
 			e.printStackTrace();
+			System.err.println(name);
 		}
 	}
 
