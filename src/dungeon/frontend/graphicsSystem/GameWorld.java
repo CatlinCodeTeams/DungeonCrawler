@@ -9,13 +9,13 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
 import dungeon.connectionInterfaces.DungeonManagerInterface;
-import dungeon.frontend.assets.FileLoader;
 import dungeon.util.physics.Point;
 
 //World object is where all the game's information is stored, as well as all of its
@@ -97,8 +97,7 @@ public abstract class GameWorld implements GameWorldInterface {
 
 	public void loadImage(final String name) {
 		try {
-			imageTable.put(name,
-					ImageIO.read(FileLoader.class.getResource(name)));
+			imageTable.put(name, ImageIO.read(new File("../assests/"+name+".png")));
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
