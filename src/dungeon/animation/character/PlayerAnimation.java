@@ -27,7 +27,7 @@ public class PlayerAnimation {
 		g.setColor(Color.RED);
 		g.fillOval(0, 0, 20, 20);
 		for(int y=20;y>0;y--){
-			l.add(new AnimationFrame(moving, 10, 0, y));
+			l.add(new AnimationFrame(moving, 2, 0, y));
 		}
 		walkUp=new AnimationInstance(l);
 	}
@@ -39,7 +39,7 @@ public class PlayerAnimation {
 		g.setColor(Color.RED);
 		g.fillOval(0, 0, 20, 20);
 		for(int y=20;y>0;y--){
-			l.add(new AnimationFrame(moving, 10, 0, -y));
+			l.add(new AnimationFrame(moving, 2, 0, -y));
 		}
 		walkDown=new AnimationInstance(l);
 	}
@@ -52,7 +52,7 @@ public class PlayerAnimation {
 
 		List<AnimationFrame> l=new ArrayList<>();
 		for(int x=20;x>0;x--){
-			l.add(new AnimationFrame(moving, 10, x, 0));
+			l.add(new AnimationFrame(moving, 2, x, 0));
 		}
 		walkLeft=new AnimationInstance(l);
 	}
@@ -65,7 +65,7 @@ public class PlayerAnimation {
 
 		List<AnimationFrame> l=new ArrayList<>();
 		for(int x=20;x>0;x--){
-			l.add(new AnimationFrame(moving, 10, -x, 0));
+			l.add(new AnimationFrame(moving, 2, -x, 0));
 		}
 		walkRight=new AnimationInstance(l);
 	}
