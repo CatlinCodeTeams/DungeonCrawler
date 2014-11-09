@@ -30,6 +30,7 @@ public class World extends GameWorld{
 		
 		loadImage("large_stone_tile");
 		loadImage("Door");
+		loadImage("OpenDoor");
 		
 		loadImage("corner_bottom_left");
 		loadImage("corner_bottom_right");
@@ -118,7 +119,13 @@ public class World extends GameWorld{
 					//pen.fillRect(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
 				
-				else if (cellType == CellType.Door){
+				else if (cellType == CellType.OpenDoor){
+					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					drawImage("OpenDoor", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					
+				}
+				
+				else if (cellType == CellType.ClosedDoor){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("Door", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					
@@ -169,8 +176,13 @@ public class World extends GameWorld{
 					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 				}
 				
-				else if (cellType==CellType.Door){
+				else if (cellType==CellType.OpenDoor){
 					pen.setColor(new Color(40, 200,40, 150));
+					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+				}
+				
+				else if (cellType==CellType.ClosedDoor){
+					pen.setColor(new Color(200, 40,40, 150));
 					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 				}
 				
@@ -227,6 +239,10 @@ public class World extends GameWorld{
 		}
 		if (event.getKeyChar()=='r'){
 			mainManager.resetKeyPressed();
+		}
+		
+		if (event.getKeyChar()==' '){
+			mainManager.interactKeyPressed();
 		}
 			
 	}
