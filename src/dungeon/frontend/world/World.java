@@ -48,6 +48,8 @@ public class World extends GameWorld{
 		loadImage("large_stone_tile");
 		loadImage("Door");
 		loadImage("DoorOpen");
+		loadImage("OpenDoorRight");
+		loadImage("DoorSide");
 
 		loadImage("corner_bottom_left");
 		loadImage("corner_bottom_right");
@@ -200,14 +202,24 @@ public class World extends GameWorld{
 
 				else if (cellType == CellType.OpenDoor){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
-					drawImage("DoorOpen", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					
+					if ((wallBelow(coordX, coordY))&&(wallAbove(coordX, coordY))){
+						drawImage("OpenDoorRight", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					}
+					else
+						drawImage("DoorOpen", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 
 				}
 
 				else if (cellType == CellType.ClosedDoor){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
-					drawImage("Door", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
-
+					
+					if ((wallBelow(coordX, coordY))&&(wallAbove(coordX, coordY))){
+						drawImage("DoorSide", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					}
+					else
+						drawImage("Door", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+				
 				}
 
 				else if (cellType == CellType.ClosedChest){
