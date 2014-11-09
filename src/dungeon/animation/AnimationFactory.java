@@ -18,4 +18,26 @@ public class AnimationFactory {
 		}
 		return new AnimationInstance(l);
 	}
+	
+	public static AnimationInstance smoothDA(String file1,String file2,int duration,int numFrames,int startX,int startY, int xCount, int yCount){
+
+		List<AnimationFrame> l=new ArrayList<>();
+		boolean frame = false;
+		for(int count=0;count<20;count++){
+			try {
+				if(count%5==0){
+					frame = !frame;
+				}
+				
+				if (frame){
+					l.add(new AnimationFrame(file1,1,startX-count*(xCount),startY-count*(yCount)+40));
+				}
+				else{
+					l.add(new AnimationFrame(file2,1,startX-count*(xCount),startY-count*(yCount)+40));
+				}
+				
+			} catch (IOException e) {}
+		}
+		return new AnimationInstance(l);
+	}
 }
