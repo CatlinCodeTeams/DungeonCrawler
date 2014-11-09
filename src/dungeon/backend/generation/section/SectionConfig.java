@@ -37,4 +37,7 @@ public class SectionConfig {
 		}
 		throw new RuntimeException("SOMETHING IS TERRIBLY WRONG");
 	}
+	public interface SectionCreator{
+		public DungeonSection getSection(int startX,int startY);
+	}
 }
