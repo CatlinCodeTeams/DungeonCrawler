@@ -62,7 +62,7 @@ public class World extends GameWorld{
 		}
 		
 		pen.setColor(new Color(0, 0, 255));
-		//pen.fillCircle(pX*20, pY*20, 16);
+		pen.fillCircle(0, 0, 20);
 		
 		
 		
@@ -84,19 +84,19 @@ public class World extends GameWorld{
 		DungeonManagerInterface mainManager = getManager();
 		
 		//Left
-		if (event.getExtendedKeyCode()==37){
+		if ((event.getExtendedKeyCode()==37)||(event.getKeyChar()=='a')){
 			mainManager.leftKeyPressed();
 		}
 		//Up
-		if (event.getExtendedKeyCode()==38){
+		if ((event.getExtendedKeyCode()==38)||(event.getKeyChar()=='w')){
 			mainManager.upKeyPressed();
 		}
 		//Right
-		if (event.getExtendedKeyCode()==39){
+		if ((event.getExtendedKeyCode()==39)||(event.getKeyChar()=='d')){
 			mainManager.rightKeyPressed();
 		}
 		//Down
-		if (event.getExtendedKeyCode()==40){
+		if ((event.getExtendedKeyCode()==40)||(event.getKeyChar()=='s')){
 			mainManager.downKeyPressed();
 		}
 		if (event.getKeyChar()=='r'){
