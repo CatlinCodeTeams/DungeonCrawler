@@ -30,7 +30,7 @@ public class World extends GameWorld{
 		
 		loadImage("large_stone_tile");
 		loadImage("Door");
-		loadImage("OpenDoor");
+		loadImage("DoorOpen");
 		
 		loadImage("corner_bottom_left");
 		loadImage("corner_bottom_right");
