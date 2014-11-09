@@ -73,6 +73,23 @@ public class DungeonGraph {
 		return count;
 	}
 
+	public Point pointOpositeNeighborOfType(int x,int y,CellType type){
+		if(getCellTypeAt(x+1,y)==type) return new Point(x-2,y);
+		if(getCellTypeAt(x-1,y)==type) return new Point(x+2,y);
+		if(getCellTypeAt(x,y+1)==type) return new Point(x,y-2);
+		if(getCellTypeAt(x,y-1)==type) return new Point(x,y+2);
+		return null;
+	}
+
+	public boolean verifyFree(DungeonSection section){
+		for(Point p:section.getContents()){
+			if(getCellTypeAt((int)p.getX(),(int)p.getY())!=CellType.WALL){
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public int getMaxX() {
 		return maxX;
 	}
