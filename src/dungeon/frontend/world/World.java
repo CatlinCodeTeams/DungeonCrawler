@@ -22,14 +22,25 @@ public class World extends GameWorld{
 	}
 
 	boolean inGame = true;
+	boolean viewMap = false;
 	
 	//ArrayList<Wall> wallList
 	
 	@Override
 	public void start() {
+		
+		loadImage("ChestClosed");
+		loadImage("ChestOpened");
+		
+		loadImage("Ladder");
 
 		loadImage("light");
 		
+		loadImage("Torch0");
+		loadImage("Torch1");
+		loadImage("Torch2");
+		loadImage("Torch3");
+		loadImage("TorchOff");
 		loadImage("large_stone_tile");
 		loadImage("Door");
 		loadImage("DoorOpen");
@@ -159,7 +170,7 @@ public class World extends GameWorld{
 				
 				else if (cellType == CellType.OpenDoor){
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
-					drawImage("OpenDoor", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					drawImage("DoorOpen", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					
 				}
 				
@@ -167,6 +178,32 @@ public class World extends GameWorld{
 					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("Door", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					
+				}
+				
+				else if (cellType == CellType.ClosedChest){
+					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					drawImage("ChestClosed", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+				}
+				
+				else if (cellType == CellType.OpenChest){
+					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					drawImage("ChestOpened", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+				}
+				
+				else if (cellType == CellType.Stair){
+					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					drawImage("Ladder", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+				}
+				
+				else if (cellType == CellType.ExtinguishedTorch){
+					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					drawImage("TorchOff", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					
+				}
+				
+				else if (cellType == CellType.Torch){
+					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					drawImage("Torch0", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
 				
 				
@@ -225,6 +262,14 @@ public class World extends GameWorld{
 					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 				}
 				
+				else if (cellType == CellType.ClosedChest){
+					pen.setColor(new Color(40, 40,200, 150));
+					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+				}
+				else if (cellType == CellType.Torch){
+					pen.setColor(new Color(255, 70,40, 150));
+					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+				}
 				
 				pen.setColor(new Color(0,0,0, 100));
 				//pen.drawRect(x*20, y*20, 20, 20);
