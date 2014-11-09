@@ -253,20 +253,20 @@ public class World extends GameWorld{
 		//--------------------------------------------
 		
 		//two-corners------------------------------
-		else if ((below)&&(!above)&&(right)&&(!left)){
-			image = "corner_top_left";
+		else if ((!below)&&(above)&&(!right)&&(left)){
+			image = "corner_bottom_right";
+		}
+		
+		else if ((!below)&&(above)&&(right)&&(!left)){
+			image = "corner_bottom_left";
 		}
 		
 		else if ((below)&&(!above)&&(!right)&&(left)){
 			image = "corner_top_right";
 		}
 		
-		else if ((!below)&&(above)&&(right)&&(!left)){
-			image = "corner_bottom_right";
-		}
-		
-		else if ((!below)&&(above)&&(!right)&&(!left)){
-			image = "corner_bottom_left";
+		else if ((below)&&(!above)&&(right)&&(!left)){
+			image = "corner_top_left";
 		}
 		//-------------------------------------
 		
