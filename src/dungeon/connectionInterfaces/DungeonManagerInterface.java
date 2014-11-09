@@ -12,6 +12,8 @@ public interface DungeonManagerInterface {
 
 	public int getPlayerY();
 
+	public int getCurrentPlayerHealth();
+
 	public void upKeyPressed();
 
 	public void downKeyPressed();

@@ -38,6 +38,11 @@ public class DungeonManager implements DungeonManagerInterface {
 	}
 
 	@Override
+	public int getCurrentPlayerHealth() {
+		return 100;
+	}
+
+	@Override
 	public Animateable getPlayerAnimations() {
 		return playerManager;
 	}
