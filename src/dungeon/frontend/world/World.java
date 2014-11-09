@@ -61,7 +61,21 @@ public class World extends GameWorld{
 	}
 	
 	public void gameUpdate(){
-		//--------------
+		
+		DungeonManagerInterface mainManager = getManager();
+		
+		if ((isKeyPressed('a'))||(isKeyPressed(37))){
+			mainManager.leftKeyPressed();
+		}
+		if ((isKeyPressed('w'))||(isKeyPressed(38))){
+			mainManager.upKeyPressed();
+		}
+		if ((isKeyPressed('d'))||(isKeyPressed(39))){
+			mainManager.rightKeyPressed();
+		}
+		if ((isKeyPressed('s'))||(isKeyPressed(40))){
+			mainManager.downKeyPressed();
+		}
 	}
 	
 	public void titleUpdate(){
