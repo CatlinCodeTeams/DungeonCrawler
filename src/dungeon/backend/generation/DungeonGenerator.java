@@ -24,12 +24,9 @@ public class DungeonGenerator {
 		sections.add(startingRoom);
 		generationTarget.makeSectionFloor(startingRoom);
 		for(int num=0;num<20;num++){
-			while(true){
-
 				for(int x=generationTarget.getMinX();x<=generationTarget.getMaxX();x++){
-
+					//
 				}
-			}
 		}
 		return generationTarget;
 	}
