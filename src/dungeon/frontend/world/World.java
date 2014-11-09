@@ -26,6 +26,7 @@ public class World extends GameWorld{
 	@Override
 	public void start() {
 
+		loadImage("large_stone_tile");
 		loadImage("Door");
 		
 		loadImage("corner_bottom_left");
@@ -105,7 +106,8 @@ public class World extends GameWorld{
 				CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
 				if (cellType==CellType.Floor){
 					pen.setColor(new Color(240, 240, 240));
-					pen.fillRect(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					//pen.fillRect(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
 				else if (cellType==CellType.Wall){
 					pen.setColor(new Color(100, 100, 100));	
@@ -115,7 +117,9 @@ public class World extends GameWorld{
 				}
 				
 				else if (cellType == CellType.Door){
+					drawImage("large_stone_tile", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 					drawImage("Door", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					
 				}
 				
 				
@@ -158,6 +162,11 @@ public class World extends GameWorld{
 				
 				else if (cellType==CellType.Floor){
 					pen.setColor(new Color(40, 40,40, 150));
+					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+				}
+				
+				else if (cellType==CellType.Door){
+					pen.setColor(new Color(40, 200,40, 150));
 					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 				}
 				
