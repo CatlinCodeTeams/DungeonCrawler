@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import dungeon.animation.AnimationFrame;
 import dungeon.connectionInterfaces.CellType;
@@ -11,6 +12,7 @@ import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
 import dungeon.frontend.graphicsSystem.GameWorld;
 import dungeon.util.physics.Point;
+import dungeon.util.physics.Vector;
 
 public class World extends GameWorld{
 
@@ -30,7 +32,7 @@ public class World extends GameWorld{
 		
 		loadImage("large_stone_tile");
 		loadImage("Door");
-		loadImage("OpenDoor");
+		loadImage("DoorOpen");
 		
 		loadImage("corner_bottom_left");
 		loadImage("corner_bottom_right");
@@ -59,7 +61,21 @@ public class World extends GameWorld{
 	}
 	
 	public void gameUpdate(){
-		//--------------
+		
+		DungeonManagerInterface mainManager = getManager();
+		
+		if ((isKeyPressed('a'))||(isKeyPressed(37))){
+			mainManager.leftKeyPressed();
+		}
+		if ((isKeyPressed('w'))||(isKeyPressed(38))){
+			mainManager.upKeyPressed();
+		}
+		if ((isKeyPressed('d'))||(isKeyPressed(39))){
+			mainManager.rightKeyPressed();
+		}
+		if ((isKeyPressed('s'))||(isKeyPressed(40))){
+			mainManager.downKeyPressed();
+		}
 	}
 	
 	public void titleUpdate(){
@@ -117,6 +133,28 @@ public class World extends GameWorld{
 					BufferedImage image= getWallImage(coordX, coordY);
 					pen.drawImage(image, x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, null);
 					//pen.fillRect(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+					
+					
+					//--------------------------------------------Shadow Casting
+					ArrayList<Point> points = new ArrayList<Point>();
+					Point p1 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment);
+					Point p2 = new Point(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment+20);
+					Point p3 = new Point(x* 20-currentImage.xDisplacment+20, y*20-currentImage.yDisplacment);
+					Point p4 = new Point(x* 20-currentImage.xDisplacment+20, y*20-currentImage.yDisplacment+20);
+					
+					points.add(p1);
+					points.add(p2);
+					points.add(p3);
+					points.add(p4);
+					
+					Point pLoc = new Point(0,0);
+					for (Point p: points){
+						Vector vec = pLoc.makeVector(p);
+						p.move(vec);
+					}
+					
+					//-----------------------------
+					
 				}
 				
 				else if (cellType == CellType.OpenDoor){
@@ -142,7 +180,8 @@ public class World extends GameWorld{
 		//pen.setColor(new Color(0, 0, 255));
 		//pen.fillCircle(0, 0, 20);
 		
-		
+		pen.setColor(new Color(0,0,0,100));
+		pen.fillOval(2, 12, 16, 10);
 		pen.drawImage(currentImage.image, 0, 0, null);
 		//
 		
