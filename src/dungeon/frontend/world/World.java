@@ -26,6 +26,7 @@ public class World extends GameWorld{
 	@Override
 	public void start() {
 
+		loadImage("Door");
 		
 		loadImage("corner_bottom_left");
 		loadImage("corner_bottom_right");
@@ -111,6 +112,10 @@ public class World extends GameWorld{
 					BufferedImage image= getWallImage(coordX, coordY);
 					pen.drawImage(image, x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, null);
 					//pen.fillRect(x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
+				}
+				
+				else if (cellType == CellType.Door){
+					drawImage("Door", x* 20-currentImage.xDisplacment, y*20-currentImage.yDisplacment, 20, 20);
 				}
 				
 				
