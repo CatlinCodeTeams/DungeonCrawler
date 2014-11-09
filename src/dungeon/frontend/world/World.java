@@ -21,6 +21,8 @@ public class World extends GameWorld{
 	@Override
 	public void start() {
 		angle = 0;
+
+		
 		
 	}
 
@@ -38,6 +40,7 @@ public class World extends GameWorld{
 		int pX = mainManager.getPlayerX();
 		int pY = mainManager.getPlayerY();
 		Point playerLocation = new Point(pX, pY);
+		
 		
 		
 		for (int x=0; x<16; x++){
