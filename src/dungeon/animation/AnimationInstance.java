@@ -7,10 +7,10 @@ import java.util.Queue;
 
 
 public class AnimationInstance {
-	private final Queue<AnimationFrame> animation=new LinkedList<AnimationFrame>();
+	protected Queue<AnimationFrame> animation=new LinkedList<AnimationFrame>();
 
-	private int waitFor=0;
-	private AnimationFrame currentFrame=null;
+	protected int waitFor=0;
+	protected AnimationFrame currentFrame=null;
 
 	public AnimationInstance(Collection<AnimationFrame> frames){
 		animation.addAll(frames);
