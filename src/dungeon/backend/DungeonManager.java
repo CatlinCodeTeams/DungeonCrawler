@@ -36,6 +36,11 @@ public class DungeonManager implements DungeonManagerInterface {
 	}
 
 	@Override
+	public Animateable getPlayerAnimations() {
+		return playerManager;
+	}
+
+	@Override
 	public void upKeyPressed() {
 		if(!playerManager.isAnimating() && layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).PASSABLE){
 			playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
@@ -79,7 +84,8 @@ public class DungeonManager implements DungeonManagerInterface {
 	}
 
 	@Override
-	public Animateable getPlayerAnimations() {
-		return playerManager;
+	public void interactKeyPressed() {
+		// TODO Auto-generated method stub
+
 	}
 }
