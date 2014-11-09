@@ -236,7 +236,7 @@ public class World extends GameWorld{
 		
 		if (!viewMap){
 			pen.setColor(new Color(0, 0, 0, 140));
-			//pen.fillRect(230, 0, 70+2, 50+2);
+			pen.fillRect(230, 0, 70+2, 50+2);
 
 			for (int x=-18; x<18; x++){
 				for (int y=-13; y<12; y++){
