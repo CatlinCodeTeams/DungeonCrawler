@@ -23,7 +23,7 @@ public abstract class Animateable {
 	}
 
 	public boolean isAnimating(){
-		return currentAnimation==null;
+		return !(currentAnimation==null);
 	}
 	public abstract AnimationFrame getCurrentStaticImage();
 }

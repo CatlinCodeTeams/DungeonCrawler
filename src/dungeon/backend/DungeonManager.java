@@ -45,19 +45,25 @@ public class DungeonManager implements DungeonManagerInterface {
 	@Override
 	public void downKeyPressed() {
 		if(!playerManager.isAnimating()){
-			playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
+			playerManager.tryAddAnimationInstance(PlayerAnimation.walkDown.copy());
 			playerManager.y++;
 		}
 	}
 
 	@Override
 	public void leftKeyPressed() {
-		playerManager.x--;
+		if(!playerManager.isAnimating()){
+			playerManager.tryAddAnimationInstance(PlayerAnimation.walkLeft.copy());
+			playerManager.x--;
+		}
 	}
 
 	@Override
 	public void rightKeyPressed() {
-		playerManager.x++;
+		if(!playerManager.isAnimating()){
+			playerManager.tryAddAnimationInstance(PlayerAnimation.walkRight.copy());
+			playerManager.x++;
+		}
 	}
 
 	@Override
