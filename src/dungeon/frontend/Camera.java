@@ -15,10 +15,15 @@ public class Camera {
 	
 	public void update(Point target){
 		Vector vec = location.makeVector(target);
-		vec.setLength(2);
+		vec.setLength(1);
 		velocity.add(vec);
+		velocity.limit(3);
 		
-		velocity.limit(6);
+		if (location.dist(target)<3){
+			velocity = new Vector(0,0);
+		}
+		
+		location.move(velocity);
 	}
 	
 	

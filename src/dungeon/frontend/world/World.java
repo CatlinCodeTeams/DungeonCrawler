@@ -3,11 +3,15 @@ package dungeon.frontend.world;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import dungeon.animation.AnimationFrame;
 import dungeon.connectionInterfaces.CellType;
 import dungeon.connectionInterfaces.DungeonManagerInterface;
 import dungeon.frontend.Camera;
+import dungeon.frontend.Floor;
+import dungeon.frontend.Player;
+import dungeon.frontend.Wall;
 import dungeon.frontend.graphicsSystem.AdvancedGraphics;
 import dungeon.frontend.graphicsSystem.GameWorld;
 import dungeon.frontend.physics.Point;
@@ -22,7 +26,10 @@ public class World extends GameWorld{
 	int angle;
 	Camera cam;
 	
-	//ArrayList<Wall> wallList
+	ArrayList<Wall> wallList = new ArrayList<Wall>();
+	ArrayList<Floor> floorList = new ArrayList<Floor>();
+	
+	Player player = new Player(0,0);
 	
 	@Override
 	public void start() {
@@ -53,9 +60,6 @@ public class World extends GameWorld{
 		int pY = mainManager.getPlayerY();
 		Point playerLocation = new Point(pX, pY);
 		
-
-		
-		//pen.moveCameraPosition((int)(-1*(cam.getX())), (int)(-1*(cam.getY())));
 		pen.moveCameraPosition(-150, -100);
 		
 		
@@ -67,14 +71,16 @@ public class World extends GameWorld{
 				pen.setColor(new Color(255, 0 , 0));
 				CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
 				if (cellType==CellType.Floor){
-					pen.setColor(new Color(240, 240, 240));
+					//pen.setColor(new Color(240, 240, 240));
+					floorList.add(new Floor(x*20, y*20));
 				}
 				else if (cellType==CellType.Wall){
-					pen.setColor(new Color(100, 100, 100));	
+					//pen.setColor(new Color(100, 100, 100));	
+					wallList.add(new Wall(x*20, y*20));
 				}
 				
-				pen.fillRect(x* 20, y*20, 20, 20);
-				pen.setColor(new Color(0,0,0, 100));
+				//pen.fillRect(x* 20, y*20, 20, 20);
+				//pen.setColor(new Color(0,0,0, 100));
 				//pen.drawRect(x*20, y*20, 20, 20);
 			}
 			
@@ -84,8 +90,11 @@ public class World extends GameWorld{
 		//pen.setColor(new Color(0, 0, 255));
 		//pen.fillCircle(0, 0, 20);
 		
-		AnimationFrame currentImage = mainManager.getPlayerAnimations().getNextImage();
-		pen.drawImage(currentImage.image, 0+currentImage.xDisplacment, 0+currentImage.yDisplacment, null);
+		
+		
+		
+		//AnimationFrame currentImage = mainManager.getPlayerAnimations().getNextImage();
+		//pen.drawImage(currentImage.image, 0+currentImage.xDisplacment, 0+currentImage.yDisplacment, null);
 		//
 		
 		
@@ -95,7 +104,7 @@ public class World extends GameWorld{
 		pen.setColor(new Color(0, 0, 0, 140));
 		pen.fillRect(230, 0, 70+2, 50+2);
 
-		
+		//MINI MAP----------
 		for (int x=-18; x<18; x++){
 			for (int y=-13; y<12; y++){
 				int coordX = pX + x;
