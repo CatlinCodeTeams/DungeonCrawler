@@ -16,4 +16,8 @@ public class AnimationFrame {
 	public AnimationFrame(BufferedImage image,int duration){
 		this(image,duration,0,0);
 	}
+	@Override
+	public String toString(){
+		return duration+":"+xDisplacment+":"+yDisplacment;
+	}
 }
