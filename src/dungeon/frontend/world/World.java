@@ -21,8 +21,10 @@ public class World extends GameWorld{
 		super(mainManager);
 	}
 
-	boolean inGame = true;
+	boolean inGame = false;
 	boolean viewMap = false;
+	
+	int fadeIn = 255;
 	
 	//ArrayList<Wall> wallList
 	
@@ -31,6 +33,8 @@ public class World extends GameWorld{
 		
 		loadImage("ChestClosed");
 		loadImage("ChestOpened");
+		
+		loadImage("titleScreen");
 		
 		loadImage("Ladder");
 
@@ -69,6 +73,10 @@ public class World extends GameWorld{
 		if (inGame){
 			gameUpdate();
 		}
+		else
+			titleUpdate();
+		
+
 	}
 	
 	public void gameUpdate(){
@@ -96,7 +104,9 @@ public class World extends GameWorld{
 	}
 	
 	public void titleUpdate(){
-		//----------------
+		if (fadeIn>0){
+			fadeIn--;
+		}
 	}
 	
 	
@@ -118,7 +128,11 @@ public class World extends GameWorld{
 		pen.drawRect(0, 0, 299, 199);
 		
 		
-		pen.drawString("A Game About Dungeons.", 10, 50);
+		drawImage("titleScreen", 0, 0, 300, 200);
+		
+		
+		pen.setColor(new Color(0,0,0,fadeIn));
+		pen.fillRect(0, 0, 300, 200);
 	}
 
 	public void gameDraw() {
@@ -298,14 +312,21 @@ public class World extends GameWorld{
 			pen.fillRect(150, 180, 150, 20);
 			
 			
-			int health = 100;
-			int maxHealth = 100;
+			double health = mainManager.getCurrentPlayerHealth();
+			double maxHealth = 1000;
 			
 			double percent = health/maxHealth;
+			int width = (int)(140*percent);
+			
+			
+			//health bar slot
+			pen.setColor(new Color(0, 0, 0, 60));
+			pen.fillRect(156 , 183, 140, 15);
 			
 			//health bar
 			pen.setColor(new Color(200, 20, 20, 200));
-			pen.fillRect(156, 183, 140, 15);
+			pen.fillRect(156 + (140-width), 183, width, 15);
+
 			
 		}
 		
@@ -331,6 +352,10 @@ public class World extends GameWorld{
 	
 	@Override
 	public void keyTriggered(KeyEvent event){
+		
+		if (!inGame){
+			inGame = true;
+		}
 		
 		DungeonManagerInterface mainManager = getManager();
 		
