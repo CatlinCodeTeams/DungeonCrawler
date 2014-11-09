@@ -39,9 +39,11 @@ public class World extends GameWorld{
 		int pY = mainManager.getPlayerY();
 		Point playerLocation = new Point(pX, pY);
 		
+		pen.moveCameraPosition(-150, -100);
 		
-		for (int x=0; x<16; x++){
-			for (int y=0; y<11; y++){
+		
+		for (int x=-8; x<8; x++){
+			for (int y=-5; y<5; y++){
 				int coordX = pX + x;
 				int coordY = pY + y;
 				
@@ -55,14 +57,56 @@ public class World extends GameWorld{
 				}
 				
 				pen.fillRect(x* 20, y*20, 20, 20);
-				pen.setColor(new Color(0,0,0));
-				pen.drawRect(x*20, y*20, 20, 20);
+				pen.setColor(new Color(0,0,0, 100));
+				//pen.drawRect(x*20, y*20, 20, 20);
 			}
 			
 		}
 		
 		pen.setColor(new Color(0, 0, 255));
-		//pen.fillCircle(pX*20, pY*20, 16);
+		pen.fillCircle(0, 0, 20);
+		
+		
+		//Reset Camera
+		pen.moveCameraPosition(150, 100);
+		
+		pen.setColor(new Color(0, 0, 0, 140));
+		pen.fillRect(230, 0, 70+2, 50+2);
+
+		
+		for (int x=-18; x<18; x++){
+			for (int y=-13; y<12; y++){
+				int coordX = pX + x;
+				int coordY = pY + y;
+				
+				pen.setColor(new Color(255, 0 , 0));
+				CellType cellType = mainManager.getCellTypeAt(coordX, coordY);
+
+				if (cellType==CellType.Wall){
+					
+					
+					pen.setColor(new Color(255, 255, 255, 150));	
+					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+				}
+				
+				else if (cellType==CellType.Floor){
+					pen.setColor(new Color(40, 40,40, 150));
+					pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
+				}
+				
+				
+				pen.setColor(new Color(0,0,0, 100));
+				//pen.drawRect(x*20, y*20, 20, 20);
+			}
+			
+		}
+		
+		pen.setColor(new Color(0, 0, 0, 100));
+		pen.fillRect(230+(18*2)+1, (13*2)+1, 2, 2);
+		
+		pen.setColor(Color.BLUE);
+		pen.fillRect(230+(18*2), (13*2), 2, 2);
+
 		
 		
 		
