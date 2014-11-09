@@ -26,6 +26,8 @@ public class World extends GameWorld{
 	@Override
 	public void start() {
 
+		loadImage("light");
+		
 		loadImage("large_stone_tile");
 		loadImage("Door");
 		
@@ -141,6 +143,8 @@ public class World extends GameWorld{
 		//Reset Camera for HUD
 		pen.moveCameraPosition(150, 100);
 		
+		drawImage("light", 0, 0, 330, 220);
+		
 		pen.setColor(new Color(0, 0, 0, 140));
 		pen.fillRect(230, 0, 70+2, 50+2);
 
@@ -182,6 +186,8 @@ public class World extends GameWorld{
 		
 		pen.setColor(Color.BLUE);
 		pen.fillRect(230+(18*2), (13*2), 2, 2);
+		
+		
 
 		
 		
