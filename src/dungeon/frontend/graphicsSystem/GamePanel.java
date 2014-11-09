@@ -83,10 +83,12 @@ public class GamePanel extends JPanel implements MouseListener,
 		// Sets up the timer. Every timer the timer is called, the GamePanel's
 		// update() and repaint() functions are run.
 		timer = new Timer();
+
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				update();
+
 				repaint();
 
 				// I'm fairly certain that the panel will be double buffered by
@@ -100,6 +102,7 @@ public class GamePanel extends JPanel implements MouseListener,
 	// ----------------------
 	// The GamePanel's update function just calls the world's updater.
 	public void update() {
+
 		world.update();
 	}
 

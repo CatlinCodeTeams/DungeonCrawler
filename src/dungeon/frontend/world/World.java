@@ -24,14 +24,99 @@ public class World extends GameWorld{
 	
 	@Override
 	public void start() {
-		angle = 0;
 		
+		loadImage("corner_bottom_left");
+		loadImage("corner_bottom_right");
+		loadImage("corner_top_left.png");
+		loadImage("corner_top_right");
+		loadImage("end_bottom");
+		loadImage("end_left");
+		loadImage("end_right");
+		loadImage("end_top");
+		loadImage("intersection_piece");
+		loadImage("mid_horizontal");
+		loadImage("mid_vertical");
+		loadImage("single_piece");
+		loadImage("t_bottom");
+		loadImage("t_left");
+		loadImage("t_right");
+		loadImage("t_top");	
 	}
 
 	@Override
 	public void update() {
-		angle ++;
+
 		
+	}
+	
+	
+	public BufferedImage getWallImage(int cX, int cY){
+		DungeonManagerInterface m = getManager();
+		
+		boolean below = wallBelow(cX, cY);
+		boolean above = wallAbove(cX, cY);
+		boolean right = wallRight(cX, cY);
+		boolean left = wallLeft(cX, cY);
+		
+		String image;
+		
+		//Singles
+		if ((below)&&(!above)&&(!right)&&(!left)){
+			image = "end_top";
+		}
+		else if ((!below)&&(above)&&(!right)&&(!left)){
+			image = "end_bottom";
+		}
+		else if ((!below)&&(!above)&&(right)&&(!left)){
+			image = "end_left";
+		}
+		else if ((!below)&&(!above)&&(!right)&&(left)){
+			image = "end_right";
+		}
+		else
+			image = "single_piece";
+		
+		BufferedImage img = getImage(image);
+		return img;
+		
+		
+	}
+	
+	public boolean wallBelow(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if (m.getCellTypeAt(coordX, coordY+1)==CellType.Wall){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean wallAbove(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if (m.getCellTypeAt(coordX, coordY-1)==CellType.Wall){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean wallRight(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if (m.getCellTypeAt(coordX+1, coordY)==CellType.Wall){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	
+	public boolean wallLeft(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if (m.getCellTypeAt(coordX-1, coordY)==CellType.Wall){
+			return true;
+		}
+		else
+			return false;
 	}
 
 	@Override
