@@ -3,7 +3,12 @@ package dungeon.frontend.world;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import dungeon.animation.AnimationFrame;
 import dungeon.backend.enemy.Enemy;
@@ -30,6 +35,8 @@ public class World extends GameWorld{
 
 	@Override
 	public void start() {
+		
+		playSound("8_bit45alt.aif");
 
 		loadImage("ChestClosed");
 		loadImage("ChestOpened");
@@ -120,6 +127,25 @@ public class World extends GameWorld{
 		else
 			titleDraw();
 	}
+	
+	public static synchronized void playSound(final String name) {
+		  new Thread(new Runnable() {
+		  // The wrapper thread is unnecessary, unless it blocks on the
+		  // Clip finishing; see comments.
+		    public void run() {
+		      try {
+		    	File file = new File(("assets"+File.separator+name));
+		    	AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
+		    	
+		        Clip clip = AudioSystem.getClip();
+		        clip.open(inputStream);
+		        clip.start(); 
+		      } catch (Exception e) {
+		        System.err.println(e.getMessage());
+		      }
+		    }
+		  }).start();
+		}
 
 
 	public void titleDraw(){
@@ -340,6 +366,8 @@ public class World extends GameWorld{
 						pen.setColor(new Color(255, 70,40, 150));
 						pen.fillRect(((x+18)* 2)+230, (y+13)*2, 2, 2);
 					}
+					
+					
 
 					pen.setColor(new Color(0,0,0, 100));
 					//pen.drawRect(x*20, y*20, 20, 20);
