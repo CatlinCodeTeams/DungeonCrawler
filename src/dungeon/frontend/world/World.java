@@ -18,7 +18,7 @@ public class World extends GameWorld{
 		super(mainManager);
 	}
 
-	int angle;
+	boolean inGame = true;
 	
 	//ArrayList<Wall> wallList
 	
@@ -46,137 +46,37 @@ public class World extends GameWorld{
 	@Override
 	public void update() {
 
-		
+		if (inGame){
+			gameUpdate();
+		}
+	}
+	
+	public void gameUpdate(){
+		//--------------
+	}
+	
+	public void titleUpdate(){
+		//----------------
 	}
 	
 	
-	public BufferedImage getWallImage(int cX, int cY){
-		DungeonManagerInterface m = getManager();
-		
-		boolean below = (wallBelow(cX, cY));
-		boolean above = (wallAbove(cX, cY));
-		boolean right = (wallRight(cX, cY));
-		boolean left = (wallLeft(cX, cY));
-		
-		String image;
-		
-		//Singles----------------------------------
-		if ((below)&&(!above)&&(!right)&&(!left)){
-			image = "end_top";
+	@Override
+	public void draw(){
+		if (inGame){
+			gameDraw();
 		}
-		else if ((!below)&&(above)&&(!right)&&(!left)){
-			image = "end_bottom";
-		}
-		else if ((!below)&&(!above)&&(right)&&(!left)){
-			image = "end_left";
-		}
-		else if ((!below)&&(!above)&&(!right)&&(left)){
-			image = "end_right";
-		}
-		//-------------------------------------------
-		
-		
-		//T-sections-------------------------------------
-		else if ((below)&&(above)&&(right)&&(!left)){
-			image = "t_right";
-		}
-		else if ((below)&&(above)&&(!right)&&(left)){
-			image = "t_left";
-		}
-		else if ((below)&&(!above)&&(right)&&(left)){
-			image = "t_bottom";
-		}
-		else if ((!below)&&(above)&&(right)&&(left)){
-			image = "t_top";
-		}
-		//--------------------------------------------
-		
-		//two-corners------------------------------
-		else if ((below)&&(!above)&&(right)&&(!left)){
-			image = "corner_top_left";
-		}
-		
-		else if ((below)&&(!above)&&(!right)&&(left)){
-			image = "corner_top_right";
-		}
-		
-		else if ((!below)&&(above)&&(right)&&(!left)){
-			image = "corner_bottom_right";
-		}
-		
-		else if ((!below)&&(above)&&(!right)&&(!left)){
-			image = "corner_bottom_left";
-		}
-		//-------------------------------------
-		
-		//singles--------------------------
-		else if ((!below)&&(!above)&&(!right)&&(!left)){
-			image = "single_piece";
-		}
-		//-----------------------------------------
-		
-		//horizontals/verticals------------------------------
-		else if ((!below)&&(!above)&&(right)&&(!left)){
-			image = "mid_horizontal";
-		}
-		else if ((below)&&(above)&&(!right)&&(!left)){
-			image = "mid_vertical";
-		}
-		
-		//alls----------
-		else if ((below)&&(above)&&(right)&&(left)){
-			image = "intersection_piece";
-		}
-		
-		
 		else
-			image = "single_piece";
-		
-		BufferedImage img = getImage(image);
-		return img;
-		
-		
+			titleDraw();
 	}
 	
-	public boolean wallBelow(int coordX, int coordY){
-		DungeonManagerInterface m = getManager();
-		if (m.getCellTypeAt(coordX, coordY+1)==CellType.Wall){
-			return true;
-		}
-		else
-			return false;
-	}
-	
-	public boolean wallAbove(int coordX, int coordY){
-		DungeonManagerInterface m = getManager();
-		if (m.getCellTypeAt(coordX, coordY-1)==CellType.Wall){
-			return true;
-		}
-		else
-			return false;
-	}
-	
-	public boolean wallRight(int coordX, int coordY){
-		DungeonManagerInterface m = getManager();
-		if (m.getCellTypeAt(coordX+1, coordY)==CellType.Wall){
-			return true;
-		}
-		else
-			return false;
-	}
-	
-	
-	public boolean wallLeft(int coordX, int coordY){
-		DungeonManagerInterface m = getManager();
-		if (m.getCellTypeAt(coordX-1, coordY)==CellType.Wall){
-			return true;
-		}
-		else
-			return false;
+
+	public void titleDraw(){
+		
+		AdvancedGraphics pen = getPen();
+		pen.setColor(new Color(100, 100,0));
 	}
 
-	@Override
-	public void draw() {
+	public void gameDraw() {
 		AdvancedGraphics pen = getPen();
 		//drawGridLines();
 		DungeonManagerInterface mainManager = getManager();
@@ -302,6 +202,131 @@ public class World extends GameWorld{
 			mainManager.resetKeyPressed();
 		}
 			
+	}
+	
+	public BufferedImage getWallImage(int cX, int cY){
+		DungeonManagerInterface m = getManager();
+		
+		boolean below = (wallBelow(cX, cY));
+		boolean above = (wallAbove(cX, cY));
+		boolean right = (wallRight(cX, cY));
+		boolean left = (wallLeft(cX, cY));
+		
+		String image;
+		
+		//Singles----------------------------------
+		if ((below)&&(!above)&&(!right)&&(!left)){
+			image = "end_top";
+		}
+		else if ((!below)&&(above)&&(!right)&&(!left)){
+			image = "end_bottom";
+		}
+		else if ((!below)&&(!above)&&(right)&&(!left)){
+			image = "end_left";
+		}
+		else if ((!below)&&(!above)&&(!right)&&(left)){
+			image = "end_right";
+		}
+		//-------------------------------------------
+		
+		
+		//T-sections-------------------------------------
+		else if ((below)&&(above)&&(right)&&(!left)){
+			image = "t_right";
+		}
+		else if ((below)&&(above)&&(!right)&&(left)){
+			image = "t_left";
+		}
+		else if ((below)&&(!above)&&(right)&&(left)){
+			image = "t_bottom";
+		}
+		else if ((!below)&&(above)&&(right)&&(left)){
+			image = "t_top";
+		}
+		//--------------------------------------------
+		
+		//two-corners------------------------------
+		else if ((below)&&(!above)&&(right)&&(!left)){
+			image = "corner_top_left";
+		}
+		
+		else if ((below)&&(!above)&&(!right)&&(left)){
+			image = "corner_top_right";
+		}
+		
+		else if ((!below)&&(above)&&(right)&&(!left)){
+			image = "corner_bottom_right";
+		}
+		
+		else if ((!below)&&(above)&&(!right)&&(!left)){
+			image = "corner_bottom_left";
+		}
+		//-------------------------------------
+		
+		//singles--------------------------
+		else if ((!below)&&(!above)&&(!right)&&(!left)){
+			image = "single_piece";
+		}
+		//-----------------------------------------
+		
+		//horizontals/verticals------------------------------
+		else if ((!below)&&(!above)&&(right)&&(!left)){
+			image = "mid_horizontal";
+		}
+		else if ((below)&&(above)&&(!right)&&(!left)){
+			image = "mid_vertical";
+		}
+		
+		//alls----------
+		else if ((below)&&(above)&&(right)&&(left)){
+			image = "intersection_piece";
+		}
+		
+		
+		else
+			image = "single_piece";
+		
+		BufferedImage img = getImage(image);
+		return img;
+		
+		
+	}
+	
+	public boolean wallBelow(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if (m.getCellTypeAt(coordX, coordY+1)==CellType.Wall){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean wallAbove(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if (m.getCellTypeAt(coordX, coordY-1)==CellType.Wall){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean wallRight(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if (m.getCellTypeAt(coordX+1, coordY)==CellType.Wall){
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	
+	public boolean wallLeft(int coordX, int coordY){
+		DungeonManagerInterface m = getManager();
+		if (m.getCellTypeAt(coordX-1, coordY)==CellType.Wall){
+			return true;
+		}
+		else
+			return false;
 	}
 
 }

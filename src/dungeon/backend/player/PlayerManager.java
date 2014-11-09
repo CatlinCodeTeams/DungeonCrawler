@@ -31,7 +31,7 @@ public class PlayerManager extends Animateable{
 			} catch(IOException e) {
 				throw new RuntimeException(e);
 			}
-		}else if(currentDirection==Direction.SOUTH){
+		}else if(currentDirection==Direction.WEST){
 			try {
 				return new AnimationFrame("spr_left.png",0,0,0);
 			} catch(IOException e) {
