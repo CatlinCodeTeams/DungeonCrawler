@@ -2,7 +2,7 @@ package dungeon.connectionInterfaces;
 
 public enum CellType {
 
-	Wall(false), Floor(true), Door(true);
+	Wall(false), Floor(true), OpenDoor(true), ClosedDoor(false);
 
 	public final boolean PASSABLE;
 
