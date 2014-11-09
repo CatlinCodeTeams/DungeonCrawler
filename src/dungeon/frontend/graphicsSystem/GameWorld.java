@@ -98,7 +98,7 @@ public abstract class GameWorld implements GameWorldInterface {
 
 	public void loadImage(final String name) {
 		try {
-			imageTable.put(name, ImageIO.read(new File("assets\\"+name+".png")));
+			imageTable.put(name, ImageIO.read(new File("assets"+File.separator+name+".png")));
 		} catch (final IOException e) {
 			e.printStackTrace();
 			System.err.println(name);

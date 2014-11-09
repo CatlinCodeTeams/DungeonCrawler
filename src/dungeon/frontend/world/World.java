@@ -277,7 +277,7 @@ public class World extends GameWorld{
 		//-----------------------------------------
 		
 		//horizontals/verticals------------------------------
-		else if ((!below)&&(!above)&&(right)&&(!left)){
+		else if ((!below)&&(!above)&&(right)&&(left)){
 			image = "mid_horizontal";
 		}
 		else if ((below)&&(above)&&(!right)&&(!left)){

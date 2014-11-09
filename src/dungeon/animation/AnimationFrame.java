@@ -18,7 +18,7 @@ public class AnimationFrame {
 		this.yDisplacment=yDisplacment;
 	}
 	public AnimationFrame(String imageName,int duration,int xDisplacment,int yDisplacment) throws IOException{
-		this(ImageIO.read(new File("assets\\"+imageName)),duration,xDisplacment,yDisplacment);
+		this(ImageIO.read(new File("assets"+File.separator+imageName)),duration,xDisplacment,yDisplacment);
 	}
 	
 	public AnimationFrame(BufferedImage image,int duration){
