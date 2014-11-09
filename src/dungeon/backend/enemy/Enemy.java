@@ -4,13 +4,18 @@ import dungeon.animation.Animateable;
 import dungeon.animation.AnimationFrame;
 
 public class Enemy extends Animateable{
-
-	public Enemy(int health){
+	public int x;
+	public int y;
+	public EnemyType type;
+	public Enemy(EnemyType type,int startX,int startY){
+		x=startX;
+		y=startY;
+		this.type=type;
 	}
 
 	@Override
 	public AnimationFrame getCurrentStaticImage() {
-		// TODO Auto-generated method stub
-		return null;
+		return type.staticInstance.getNextFrame();
 	}
+
 }

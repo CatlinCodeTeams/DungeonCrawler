@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import dungeon.animation.AnimationFrame;
 import dungeon.animation.AnimationInstance;
+import dungeon.animation.ReapeatingAnimationInstance;
 
 public class SlimeAnimation {
 	public static AnimationInstance moveUp;
@@ -59,6 +60,14 @@ public class SlimeAnimation {
 					new AnimationFrame("Slime4.png", 10, 0, 4),
 					new AnimationFrame("Slime5.png", 10, 0, 0) });
 		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public static AnimationInstance still;
+	static{
+		try{
+		new ReapeatingAnimationInstance(new AnimationFrame[]{new AnimationFrame("Slime1.png", 10, 0, 0)});
+		}catch (IOException e){
 			throw new RuntimeException(e);
 		}
 	}

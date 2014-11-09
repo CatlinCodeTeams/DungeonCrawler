@@ -3,6 +3,7 @@ package dungeon.backend;
 import dungeon.animation.Animateable;
 import dungeon.animation.character.PlayerAnimation;
 import dungeon.backend.enemy.Enemy;
+import dungeon.backend.enemy.EnemyManager;
 import dungeon.backend.generation.DungeonGenerator;
 import dungeon.backend.generation.DungeonGraph;
 import dungeon.backend.player.PlayerManager;
@@ -15,11 +16,13 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	protected final PlayerManager playerManager = new PlayerManager();
 	protected final DungeonGenerator gen;
+	protected final EnemyManager enemyMan;
 	protected DungeonGraph layout;
 
 	public DungeonManager(final DungeonType type) {
 		gen = new DungeonGenerator(type);
 		layout = gen.generate();
+		enemyMan=new EnemyManager(layout, type, playerManager);
 	}
 
 	@Override
@@ -49,10 +52,11 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void upKeyPressed() {
-		if(!playerManager.isAnimating()){
+		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
 			if(layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).PASSABLE){
 				playerManager.tryAddAnimationInstance(PlayerAnimation.walkUp.copy());
 				playerManager.y--;
+				enemyMan.queueForTurn(playerManager);
 			}
 			playerManager.currentDirection=Direction.NORTH;
 		}
@@ -60,10 +64,11 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void downKeyPressed() {
-		if(!playerManager.isAnimating()){
+		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
 			if(layout.getCellTypeAt(getPlayerX(), getPlayerY()+1).PASSABLE){
 				playerManager.tryAddAnimationInstance(PlayerAnimation.walkDown.copy());
 				playerManager.y++;
+				enemyMan.queueForTurn(playerManager);
 			}
 			playerManager.currentDirection=Direction.SOUTH;
 		}
@@ -71,10 +76,11 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void leftKeyPressed() {
-		if(!playerManager.isAnimating()){
+		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
 			if(layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).PASSABLE){
 				playerManager.tryAddAnimationInstance(PlayerAnimation.walkLeft.copy());
 				playerManager.x--;
+				enemyMan.queueForTurn(playerManager);
 			}
 			playerManager.currentDirection=Direction.WEST;
 		}
@@ -82,25 +88,19 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public void rightKeyPressed() {
-		if(!playerManager.isAnimating()){
+		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
 			if(layout.getCellTypeAt(getPlayerX()+1, getPlayerY()).PASSABLE){
 				playerManager.tryAddAnimationInstance(PlayerAnimation.walkRight.copy());
 				playerManager.x++;
+				enemyMan.queueForTurn(playerManager);
 			}
 			playerManager.currentDirection=Direction.EAST;
 		}
 	}
 
 	@Override
-	public void resetKeyPressed() {
-		layout = gen.generate();
-		playerManager.x = 0;
-		playerManager.y = 0;
-	}
-
-	@Override
 	public void interactKeyPressed() {
-		if(!playerManager.isAnimating()){
+		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
 			if(playerManager.currentDirection==Direction.NORTH){
 				layout.makeCellType(getPlayerX(), getPlayerY()-1,layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).transform);
 			}
@@ -113,12 +113,27 @@ public class DungeonManager implements DungeonManagerInterface {
 			if(playerManager.currentDirection==Direction.WEST){
 				layout.makeCellType(getPlayerX()-1, getPlayerY(),layout.getCellTypeAt(getPlayerX()-1, getPlayerY()).transform);
 			}
+			enemyMan.queueForTurn(playerManager);
 		}
 
 	}
 
 	@Override
+	public void resetKeyPressed() {
+		if(!playerManager.isAnimating() && !enemyMan.enemyTurn.get()){
+			layout = gen.generate();
+			playerManager.x = 0;
+			playerManager.y = 0;
+		}
+	}
+
+	@Override
 	public Enemy getEnemyAt(int x, int y) {
-		return null;
+		return enemyMan.getEnemyAt(x, y);
+	}
+
+	@Override
+	public void confirmNoVisableEnemyAnimations() {
+		enemyMan.enemyTurn.set(false);
 	}
 }

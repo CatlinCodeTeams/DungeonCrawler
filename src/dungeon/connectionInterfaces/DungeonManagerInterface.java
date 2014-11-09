@@ -26,5 +26,7 @@ public interface DungeonManagerInterface {
 
 	public void interactKeyPressed();
 
+	public void confirmNoVisableEnemyAnimations();
+
 	public Animateable getPlayerAnimations();
 }

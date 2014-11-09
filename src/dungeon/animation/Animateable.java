@@ -10,6 +10,10 @@ public abstract class Animateable {
 		}
 	}
 
+	public void overrideAnimationInstance(AnimationInstance a){
+		currentAnimation=a;
+	}
+
 	public AnimationFrame getNextImage(){
 		if (currentAnimation==null){
 			return getCurrentStaticImage();
