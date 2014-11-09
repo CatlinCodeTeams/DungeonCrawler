@@ -44,9 +44,9 @@ public class DungeonGenerator {
 
 				DungeonSection toGenSection;
 				if(select.getX()>opposite.getX()){
-					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.EAST);
-				}else if(select.getX()<opposite.getX()){
 					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.WEST);
+				}else if(select.getX()<opposite.getX()){
+					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.EAST);
 				}else if(select.getY()>opposite.getY()){
 					toGenSection=targetType.config.getSection((int)opposite.getX(), (int)opposite.getY(), Direction.NORTH);
 				}else if(select.getY()<opposite.getY()){
@@ -55,10 +55,11 @@ public class DungeonGenerator {
 					throw new RuntimeException();
 				}
 				if(generationTarget.verifyFree(toGenSection)){
-					generationTarget.makeCellType((int)select.getX(), (int)select.getY(),CellType.Door);
 					generationTarget.makeSectionFloor(toGenSection);
+					generationTarget.makeCellType((int)select.getX(), (int)select.getY(),CellType.Door);
 					break;
 				}else{
+					System.out.println(select.getX());
 					continue;
 				}
 			}

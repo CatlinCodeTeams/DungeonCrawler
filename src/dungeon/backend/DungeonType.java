@@ -18,13 +18,13 @@ public enum DungeonType {
 				public DungeonSection getSection(int startX, int startY, Direction d) {
 					int legnth=(int)(5*rgen.nextDouble())+3;
 					if(d==Direction.NORTH){
-						return new RectangleSection(startX,startY-legnth-1,1,legnth);
+						return new RectangleSection(startX,startY-legnth+1,1,legnth);
 					}
 					if(d==Direction.SOUTH){
 						return new RectangleSection(startX,startY,1,legnth);
 					}
 					if(d==Direction.WEST){
-						return new RectangleSection(startX-legnth-1,startY,legnth,1);
+						return new RectangleSection(startX-legnth+1,startY,legnth,1);
 					}
 					if(d==Direction.EAST){
 						return new RectangleSection(startX,startY,legnth,1);
@@ -44,13 +44,13 @@ public enum DungeonType {
 						return new RectangleSection(startX-width/2,startY-height+1,width,height);
 					}
 					if(d==Direction.SOUTH){
-						return new RectangleSection(startX-width/2,startY,1,height);
+						return new RectangleSection(startX-width/2,startY,width,height);
 					}
 					if(d==Direction.WEST){
-						return new RectangleSection(startX-width+1,startY-height/2,width,1);
+						return new RectangleSection(startX-width+1,startY-height/2,width,height);
 					}
 					if(d==Direction.EAST){
-						return new RectangleSection(startX,startY-height/2,width,1);
+						return new RectangleSection(startX,startY-height/2,width,height);
 					}
 					throw new RuntimeException();
 				}

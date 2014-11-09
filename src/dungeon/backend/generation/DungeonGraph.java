@@ -35,16 +35,16 @@ public class DungeonGraph {
 	}
 	public void makeCellType(final int x, final int y,final CellType type) {
 		if (x > maxX) {
-			maxX = x;
+			maxX = x+2;
 		}
 		if (x < minX) {
-			minX = x;
+			minX = x-2;
 		}
 		if (y > maxY) {
-			maxY = y;
+			maxY = y+2;
 		}
 		if (y < minY) {
-			minY = y;
+			minY = y-2;
 		}
 		locations.get(x).put(y, type);
 	}
@@ -76,10 +76,10 @@ public class DungeonGraph {
 	}
 
 	public Point pointOpositeNeighborOfType(int x,int y,CellType type){
-		if(getCellTypeAt(x+1,y)==type) return new Point(x-2,y);
-		if(getCellTypeAt(x-1,y)==type) return new Point(x+2,y);
-		if(getCellTypeAt(x,y+1)==type) return new Point(x,y-2);
-		if(getCellTypeAt(x,y-1)==type) return new Point(x,y+2);
+		if(getCellTypeAt(x+1,y)==type) return new Point(x-1,y);
+		if(getCellTypeAt(x-1,y)==type) return new Point(x+1,y);
+		if(getCellTypeAt(x,y+1)==type) return new Point(x,y-1);
+		if(getCellTypeAt(x,y-1)==type) return new Point(x,y+1);
 		return null;
 	}
 
