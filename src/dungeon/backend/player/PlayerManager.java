@@ -9,6 +9,7 @@ import dungeon.util.Direction;
 public class PlayerManager extends Animateable{
 	public int x;
 	public int y;
+	public int health=1000;
 	public Direction currentDirection=Direction.SOUTH;
 
 	@Override

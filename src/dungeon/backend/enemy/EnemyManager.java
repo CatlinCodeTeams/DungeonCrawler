@@ -29,12 +29,12 @@ public class EnemyManager {
 		List<Enemy> newEnemies=new ArrayList<>();
 		for(Enemy e:currentEnemies){
 			if(e.health>0){
-				newEnemies.add(e);
+				if(world.getCellTypeAt(e.x, e.y).PASSABLE) newEnemies.add(e);
 			}
 		}
 		currentEnemies=newEnemies;
 		Random aiRandom=new Random();
-		if(currentEnemies.size()<10){
+		if(currentEnemies.size()<100){
 			List<Point> spawnPoints=world.getAllLocationsOfCellType(CellType.Floor);
 			List<Point> fairSpawPoints=new ArrayList<>();
 			for(Point p:spawnPoints){
@@ -52,6 +52,11 @@ public class EnemyManager {
 			}
 			switch(move){
 			case NORTH:
+//				if(e.x==player.x){
+//					if(e.y==player.y+1){
+//						player.health-=e.type.damage;
+//					}
+//				}
 				e.y--;
 				e.overrideAnimationInstance(e.type.moveUp.copy());
 				break;

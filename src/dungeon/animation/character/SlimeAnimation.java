@@ -21,6 +21,78 @@ public class SlimeAnimation {
 			throw new RuntimeException(e);
 		}
 	}
+	public static AnimationInstance attackUp;
+	static {
+		try {
+			attackUp = new AnimationInstance(new AnimationFrame[] {
+					new AnimationFrame("Slime0.png", 10, 0, 0),
+					new AnimationFrame("Slime1.png", 10, 0, 4),
+					new AnimationFrame("Slime2.png", 10, 0, 8),
+					new AnimationFrame("Slime3.png", 10, 0, 12),
+					new AnimationFrame("Slime4.png", 10, 0, 16),
+					new AnimationFrame("Slime5.png", 10, 0, 20),
+					new AnimationFrame("Slime0.png", 10, 0, 16),
+					new AnimationFrame("Slime1.png", 10, 0, 12),
+					new AnimationFrame("Slime2.png", 10, 0, 8),
+					new AnimationFrame("Slime3.png", 10, 0, 4),
+					new AnimationFrame("Slime4.png", 10, 0, 0)});
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public static AnimationInstance attackDown;
+	static {
+		try {
+			attackDown = new AnimationInstance(new AnimationFrame[] {
+					new AnimationFrame("Slime0.png", 10, 0, 0),
+					new AnimationFrame("Slime1.png", 10, 0, -4),
+					new AnimationFrame("Slime2.png", 10, 0, -8),
+					new AnimationFrame("Slime3.png", 10, 0, -12),
+					new AnimationFrame("Slime4.png", 10, 0, -16),
+					new AnimationFrame("Slime5.png", 10, 0, -20),
+					new AnimationFrame("Slime0.png", 10, 0, -16),
+					new AnimationFrame("Slime1.png", 10, 0, -12),
+					new AnimationFrame("Slime2.png", 10, 0, -8),
+					new AnimationFrame("Slime3.png", 10, 0, -4),
+					new AnimationFrame("Slime4.png", 10, 0, 0)});
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public static AnimationInstance attackLeft;
+	static {
+		try {
+			attackLeft = new AnimationInstance(new AnimationFrame[] {
+					new AnimationFrame("Slime1.png", 10, 4,0),
+					new AnimationFrame("Slime2.png", 10, 8,0),
+					new AnimationFrame("Slime3.png", 10, 12,0),
+					new AnimationFrame("Slime4.png", 10, 16,0),
+					new AnimationFrame("Slime5.png", 10, 20,0),
+					new AnimationFrame("Slime0.png", 10, 16,0),
+					new AnimationFrame("Slime1.png", 10, 12,0),
+					new AnimationFrame("Slime2.png", 10, 8,0),
+					new AnimationFrame("Slime3.png", 10, 4,0)});
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public static AnimationInstance attackRight;
+	static {
+		try {
+			attackRight = new AnimationInstance(new AnimationFrame[] {
+					new AnimationFrame("Slime1.png", 10, -4,0),
+					new AnimationFrame("Slime2.png", 10, -8,0),
+					new AnimationFrame("Slime3.png", 10, -12,0),
+					new AnimationFrame("Slime4.png", 10, -16,0),
+					new AnimationFrame("Slime5.png", 10, -20,0),
+					new AnimationFrame("Slime0.png", 10, -16,0),
+					new AnimationFrame("Slime1.png", 10, -12,0),
+					new AnimationFrame("Slime2.png", 10, -8,0),
+					new AnimationFrame("Slime3.png", 10, -4,0)});
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	public static AnimationInstance moveDown;
 	static {
 		try {

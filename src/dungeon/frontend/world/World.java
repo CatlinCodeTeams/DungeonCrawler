@@ -31,10 +31,12 @@ public class World extends GameWorld{
 
 	int fadeIn = 255;
 
-	//ArrayList<Wall> wallList
+	ArrayList<Particle> partList;
 
 	@Override
 	public void start() {
+		
+		partList = new ArrayList<Particle>();
 		
 		playSound("8_bit45alt.aif");
 
@@ -89,6 +91,10 @@ public class World extends GameWorld{
 	}
 
 	public void gameUpdate(){
+		
+		for (Particle p: partList){
+			p.update(this);
+		}
 
 		DungeonManagerInterface mainManager = getManager();
 
@@ -302,6 +308,9 @@ public class World extends GameWorld{
 					}
 					AnimationFrame targetFrame=target.getNextImage();
 					pen.drawImage(targetFrame.image, x* 20-currentImage.xDisplacment-targetFrame.xDisplacment, y*20-currentImage.yDisplacment-targetFrame.yDisplacment, null);
+					if(target.health<=10){
+						partList.add(new SmokeParticle(x* 20-currentImage.xDisplacment-targetFrame.xDisplacment+10, y*20-currentImage.yDisplacment-targetFrame.yDisplacment+10));
+					}
 				}
 			}
 		}
@@ -318,6 +327,10 @@ public class World extends GameWorld{
 		pen.drawImage(currentImage.image, 0, 0, null);
 		//
 
+		
+		for (Particle p: partList){
+			p.draw(this);
+		}
 
 		//Reset Camera for HUD
 		pen.moveCameraPosition(150, 100);

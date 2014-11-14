@@ -10,6 +10,21 @@ public enum EnemyAi {
 	Simple(new AiControler(){
 		@Override
 		public Direction toMove(Enemy e, DungeonGraph g,EnemyManager em,PlayerManager pm, Random aiRandom) {
+//			if(pm.y==e.y){
+//			if(pm.x==e.x+1){
+//				return Direction.EAST;
+//			}else if(pm.x==e.x-1){
+//				return Direction.WEST;
+//			}
+//			}
+//			if(pm.x==e.x){
+//				if(pm.y==pm.y+1){
+//					return Direction.NORTH;
+//				}
+//				if(pm.y==pm.y+1){
+//					return Direction.SOUTH;
+//				}
+//			}
 			switch(aiRandom.nextInt(4)){
 			case 0:
 				if(g.getCellTypeAt(e.x+1, e.y).PASSABLE && em.getEnemyAt(e.x+1, e.y)==null &&!(pm.x==e.x+1 && pm.y==e.y)){

@@ -42,7 +42,7 @@ public class DungeonManager implements DungeonManagerInterface {
 
 	@Override
 	public int getCurrentPlayerHealth() {
-		return 100;
+		return playerManager.health;
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class DungeonManager implements DungeonManagerInterface {
 			if(playerManager.currentDirection==Direction.NORTH){
 				if(enemyMan.getEnemyAt(getPlayerX(), getPlayerY()-1)!=null){
 					playerManager.tryAddAnimationInstance(PlayerAnimation.attackUp.copy());
-					enemyMan.getEnemyAt(getPlayerX(),getPlayerY()+1).health-=10;
+					enemyMan.getEnemyAt(getPlayerX(),getPlayerY()-1).health-=10;
 				}else
 				layout.makeCellType(getPlayerX(), getPlayerY()-1,layout.getCellTypeAt(getPlayerX(), getPlayerY()-1).transform);
 			}
